@@ -12,7 +12,7 @@
     <input type="text"  name="bookName"/>
     <input type="text"  name="bookName"/>
     <div id="input0"></div>
-    <div class="add" onclick="addInput()">One more book</div>
+    <div class="add" onclick="addInput()">One more </div>
     <input type="hidden" name="command" value="getBook"/>
     <input type="hidden" name="email" value="${email}"/>
     <input type="submit" value="Get">
@@ -20,12 +20,46 @@
 <div>
     <label>Email</label>
     <input type="text"  placeholder="${email}" id="email" name="email"/>
-    <input type="button" onclick="" value="Get reader>"/>
-
-</div><%--
-<div class="add" onclick="addAuthors()">Send</di>v--%><%--
-<td><a href="main?email=${email}&command=checkUser">Check</a></td>--%>
+    <input type="button" onclick="getReader()" value="Get reader>"/>
+<br>
+    <label id="result"/>
+</div>
+<%--<div class="add" onclick="addAuthors()">Send</di>v&ndash;%&gt;&lt;%&ndash;--%>
+<%--<td><a href="main?email=${email}&command=checkUser">Check</a></td>&ndash;%&gt;--%>
 <td><a href="addBook.jsp">Add reader</a></td>
+
+</body>
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        (function(f) {
+            function g(c) {
+                return function(b, a) {
+                    b = b.cells[c].textContent;
+                    a = a.cells[c].textContent;
+                    b = +b || b;
+                    a = +a || a;
+                    return b > a ? 1 : b < a ? -1 : 0
+                }
+            }
+            var d = document.querySelector(f),
+                e = [].slice.call(d.rows, 1);
+            [].slice.call(d.rows[0].cells).forEach(function(c, b) {
+                var a = 0;
+                c.addEventListener("click", function() {
+                    e.sort(g(b));
+                    a && e.reverse();
+                    e.forEach(function(a) {
+                        d.appendChild(a)
+                    });
+                    a ^= 1
+                })
+            })
+        })(".table")
+    });
+</script>
+</html>
+<%--/* reader  table--%>
+<%--
 <table class="table" id="table">
     <tr id="zag">
         <td class="sorted-asc">Фамилия</td>
@@ -64,34 +98,4 @@
 </table>
 <c:if test="${currentPage lt noOfPages}">
     <td><a href="getBook?page=${currentPage + 1}">Next</a></td>
-</c:if>
-</body>
-<script>
-    window.addEventListener("DOMContentLoaded", function() {
-        (function(f) {
-            function g(c) {
-                return function(b, a) {
-                    b = b.cells[c].textContent;
-                    a = a.cells[c].textContent;
-                    b = +b || b;
-                    a = +a || a;
-                    return b > a ? 1 : b < a ? -1 : 0
-                }
-            }
-            var d = document.querySelector(f),
-                e = [].slice.call(d.rows, 1);
-            [].slice.call(d.rows[0].cells).forEach(function(c, b) {
-                var a = 0;
-                c.addEventListener("click", function() {
-                    e.sort(g(b));
-                    a && e.reverse();
-                    e.forEach(function(a) {
-                        d.appendChild(a)
-                    });
-                    a ^= 1
-                })
-            })
-        })(".table")
-    });
-</script>
-</html>
+</c:if>--%>

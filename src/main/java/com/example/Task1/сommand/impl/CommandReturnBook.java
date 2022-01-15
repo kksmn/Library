@@ -15,7 +15,7 @@ public class CommandReturnBook implements ICommand {
         try {
             Reader reader = new Reader();
             Double raiting = 0.0;
-            raiting = Double.valueOf(request.getParameter("raiting"));
+            raiting = Double.valueOf(request.getParameter("rating"));
             reader.setFirstName(request.getParameter("firstName"));
             reader.setLastName(request.getParameter("lastName"));
             reader.setEmail(request.getParameter("email"));

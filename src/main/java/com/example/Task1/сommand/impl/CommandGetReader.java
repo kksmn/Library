@@ -3,6 +3,7 @@ package com.example.Task1.сommand.impl;
 import com.example.Task1.dao.impl.ReaderDaoImpl;
 import com.example.Task1.models.Reader;
 import com.example.Task1.сommand.ICommand;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,26 +19,17 @@ public class CommandGetReader implements ICommand {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             ReaderDaoImpl readerService=new ReaderDaoImpl();
-            int page = 1;
-            int n;
-            int recordsPerPage = 1;
-            if(request.getParameter("page") != null)
-                page = Integer.parseInt(request.getParameter("page"));
             String email=(request.getParameter("email"));
-            List<Reader> readerList=new ArrayList<>();
-            readerList.add(readerService.findReader(email));
-            int noOfRecords = 1;
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", page);
-            request.setAttribute("email", email);
-            request.setAttribute("list", readerList);
+            Reader reader=readerService.findReader(email);
+            String json = new ObjectMapper().writeValueAsString(reader);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("getBook.jsp");
-        requestDispatcher.forward(request, response);
+
     }
 }

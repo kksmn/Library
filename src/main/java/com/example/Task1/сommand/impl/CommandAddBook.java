@@ -31,21 +31,21 @@ public class CommandAddBook implements ICommand {
         List<Genre> genreList;
         List<Long> authorList = new ArrayList<>();
         String path = request.getParameter("image");
-
         String[] genres = request.getParameterValues("genre");
         String[] authors = request.getParameterValues("authorName");
-      //  String[] authorImage = request.getParameterValues("authorImage");
-
+        if (!request.getParameter("originalName").equals("")) {
+            book.setOriginalName(request.getParameter("originalName"));
+        }
+        if (!request.getParameter("countPages").equals("")) {
+            book.setCountPages(Integer.valueOf(request.getParameter("countPages")));
+        }
         book.setName(request.getParameter("russianName"));
-        book.setOriginalName(request.getParameter("originalName"));
         book.setCount(Integer.valueOf(request.getParameter("count")));
         book.setYear(Integer.valueOf(request.getParameter("year")));
-        book.setCountPages(Integer.valueOf(request.getParameter("countPages")));
         Double price = Double.valueOf(request.getParameter("price"));
         Double priceForDay = Double.valueOf(request.getParameter("priceForDay"));
         genreList=genreService.addNewGenres( genres);
         book.setGenres(genreList);
-        //authorList=authorService.addAuthorToList( authors, authorImage);
         Long bookId = bookService.addNewBook(book, path);
         genreService.addGenreToBook(bookId,genreList);
         for (int i=0;i<authors.length;i++) {

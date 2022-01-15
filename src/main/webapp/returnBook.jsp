@@ -7,48 +7,49 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <link rel="stylesheet" href="templates/css/addBook.css">
+    <script src="templates/js/getReader.js"></script>
+    <script src="templates/js/returnBook.js"></script>
+</head>
 <body>
-<form><input type="search" placeholder="Reader name"/></form>
+<div>
+    <label>Email</label>
+    <input type="text"  placeholder="${email}" id="email" name="email"/>
+    <input type="button" onclick="getReader()" value="Get reader>"/>
+</div>
 
 <table>
-    <tr>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Дата рождения</th>
-        <th>Адрес</th>
-        <th>Email</th>
-    </tr>
-    <c:forEach items="${list}" var="reader" >
         <tr>
+            <th>Фамилия</th>
             <td>${reader.getLastName() }</td>
+            <th>Имя</th>
             <td>${reader.getName() }</td>
+            <th>Дата рождения</th>
             <td>${reader.getDate() }</td>
+            <th>Адрес</th>
             <td>${reader.getAddress() }</td>
+            <th>Email</th>
             <td>${reader.getEmail() }</td>
         </tr>
-    </c:forEach>
 </table>
-<form action="returnBook" method="post">
+<hr />
+<div>
     <label>Return book</label>
+    <Label>Rus name</Label>
+    <input type="text" class="rusname"/>
+    <Label>Rating</Label>
+    <input type="number" class="rating"/>
+    <Label>Defects</Label>
+    <input type="file" id="authorImage" name="path" accept=".jpg,.png,.jpeg ">
+    <input type="button" onclick="returnBook()"/>
 
-    <input type="text" placeholder="Russian Name" name="russianname"/>
-    <input type="text" placeholder="Author" name="authorName"/>
-    <input type="number" placeholder="Raiting" name="raiting"/>
-    <input type = "checkbox"  required name = "defects" value = "true">Defects
-    <input type="file" name="image">
-    <input type="date" id="date"/>
-    <input type="hidden" name="command" value="returnBook" />
-    <input type="submit" value="Return">
-</form>
-=
-<script>
-    (function () {
-        var date = new Date().toISOString().substring(0, 10),
-            field = document.querySelector('#date');
-        field.value = date;
-        console.log(field.value);
+</div>
+<div>
+    <input type="number" value=${date}/>
+    <input type="number" valuew="${price}"/>
+</div>
 
-    })()
-</script>
+
 </body>
 </html>
