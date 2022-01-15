@@ -158,7 +158,7 @@ public class BookDaoImpl implements BookDao {
     public Double getBookPrice(BookCopy copy) {
         Calendar calendar = getCurrentDate();
         int countOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        if(copy.isDamaged)
+        if(copy.getDamaged())
         return countOfDays * copy.getPriceForDay()*0.6;
         else return countOfDays * copy.getPriceForDay();
     }

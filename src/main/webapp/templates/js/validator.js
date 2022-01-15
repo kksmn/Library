@@ -1,55 +1,70 @@
-const form = document.getElementById( 'form' );
-
-form.addEventListener( 'submit', validate );
-
-function validate(e) {
-
+function validate(){
     let valid = true;
+    let formReq = document.getElementsByClassName('req');
+    let text = '';
 
-    // удаляем все уже существующие ошибки валидации, чтобы проверять по новой
-    const errors = document.getElementsByClassName( 'validation-error' );
-    while( errors.length > 0 ){
-        errors[0].parentNode.removeChild( errors[0] );
-    }
+    for (let i = 0; i < formReq.length; i++) {
+        const input = formReq[i];
+        input.nextElementSibling.innerHTML = '';
+        if (input.value.trim() === '') {
+            text = 'should not be empty';
+            input.nextElementSibling.innerHTML = `${text}`;
+            valid=false;
 
-    const rusNameField = document.getElementById( "rusName" );
-
-    if ( ! rusNameField.value ) { // если не заполнено
-        document.querySelector( 'label[for="rusName"]' ).innerHTML += ' <span class="validation-error">Rus name is required</span>';
-        valid = false;
-    }
-
-    const priceField = document.getElementById( "price" );
-
-    if ( Number.parseInt(priceField.value)<=0) {
-        document.querySelector( 'label[for="price"]' ).innerHTML += ' <span class="validation-error">Price can not be less than or equal to zero</span>';
-        valid = false;
-    }
-
-    const pricePerDayField = document.getElementById( "pricePerDay" );
-
-    if (Number.parseInt(pricePerDayField.value)<=0) {
-        document.querySelector( 'label[for="pricePerDay"]' ).innerHTML += ' <span class="validation-error">Price per day can not be less than or equal to zero</span>';
-        valid = false;
-    }
-
-    const countField = document.getElementById( "count" );
-
-    if (Number.parseInt(countField.value)<=0) {
-        document.querySelector( 'label[for="count"]' ).innerHTML += ' <span class="validation-error">Book Copy count can not be less than or equal to zero</span>';
-        valid = false;
-    }
-
-    const authorField = document.getElementById( "author" );
-
-    if (! authorField.value) {
-        document.querySelector( 'label[for="author"]' ).innerHTML += ' <span class="validation-error">Book Copy count can not be less than or equal to zero</span>';
-        valid = false;
-    }
-    if( false == valid ) {
-        e.preventDefault(); // предотвращаем отправку формы, если есть ошибки валидации
+        } else if (input.id === 'price' || input.id === 'pricePerDay') {
+            if (!isPriceValid(input.value)) {
+                text = 'incorrect price format'
+                input.nextElementSibling.innerHTML = `${text}`;
+                valid=false;
+            }
+        } else if (input.id === 'number') {
+            if (Number.parseInt(input.value) < 0) {
+                text = 'incorrect number format (less then 0)'
+                input.nextElementSibling.innerHTML = `${text}`;
+                valid=false;
+            }
+        }else if (input.type === 'checkbox') {
+            if (!checkRequire()) {
+                text = 'You should choose at least one genre';
+                let genreInputError = document.getElementById('genreInput');
+                genreInputError.value = `${text}`;
+                valid=false;
+            }
+        }
     }
     return valid;
-
 }
 
+function validateAuthorInput(){
+    let valid = true;
+    let formReq = document.getElementsByName('authorName');
+    let text = '';
+    for (let i = 0; i < formReq.length; i++) {
+        const input = formReq[i];
+        input.nextElementSibling.innerHTML = '';
+        if (input.value.trim() === '') {
+            text = 'should not be empty';
+            input.nextElementSibling.innerHTML = `${text}`;
+            valid=false;
+
+        }
+    }
+    return valid;
+}
+
+function checkRequire() {
+    let el = document.getElementsByClassName("genre");
+
+    let atLeastOneChecked = false;//at least one cb is checked
+    for (let i = 0; i < el.length; i++) {
+        if (el[i].checked === true) {
+            atLeastOneChecked = true;
+        }
+    }
+    return atLeastOneChecked;
+}
+
+function isPriceValid(input) {
+    let regex = /^\d*(.\d{2})?$/;
+    return regex.test(input);
+}

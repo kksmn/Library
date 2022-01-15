@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="templates/css/addBook.css">
     <script src="templates/js/addBooks.js"></script>
+    <script src="templates/js/validator.js"></script>
 </head>
 
 <body>

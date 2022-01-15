@@ -21,15 +21,21 @@ public class CommandGetReader implements ICommand {
             ReaderDaoImpl readerService=new ReaderDaoImpl();
             String email=(request.getParameter("email"));
             Reader reader=readerService.findReader(email);
-            String json = new ObjectMapper().writeValueAsString(reader);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
+            request.setAttribute("reader", reader);
+            String json=new ObjectMapper().writeValueAsString(reader);
+            System.out.println(json);
+            List<String>list=new ArrayList<String>() ;
+            list.add(reader.getFirstName());
+            list.add(reader.getLastName());
+            response.setContentType("application/json");  // Set content type of the response so that jQuery knows what it can expect.
+            response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
             response.getWriter().write(json);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-    }
+/*        RequestDispatcher requestDispatcher = request.getRequestDispatcher("getBook.jsp");
+        requestDispatcher.forward(request, response);*/
+     }
 }

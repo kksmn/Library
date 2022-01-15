@@ -4,30 +4,52 @@
 <head>
     <link rel="stylesheet" href="templates/css/addBook.css">
     <script src="templates/js/getBook.js"></script>
+    <script src="templates/js/validator.js"></script>
 </head>
-<body>
-<form action="main" method="post">
-    <Label>Rus name</Label>
+
+<body><div>
+    <label>Email</label>
+    <input type="text"  placeholder="${email}" id="email" name="email" class="readerInput"/>
+    <label class="errorInput" ></label>
+    <input type="button" onclick="getReader()" value="Get reader"/>
+    <br>
+    <Label id="readerInput"></Label>
+</div>
 <br>
-    <input type="text"  name="bookName"/>
-    <input type="text"  name="bookName"/>
+<td><a href="addBook.jsp" >Add reader</a></td>
+<br>
+<form action="main" method="post" onsubmit="return validate()">
+    <Label>Rus name</Label>
+<hr>
+    <input type="text"  name="bookName" class="req"/>
+    <label class="errorInput" ></label>
     <div id="input0"></div>
-    <div class="add" onclick="addInput()">One more </div>
+    <div class="add" onclick="addInput()">One more</div>
     <input type="hidden" name="command" value="getBook"/>
     <input type="hidden" name="email" value="${email}"/>
     <input type="submit" value="Get">
 </form>
-<div>
-    <label>Email</label>
-    <input type="text"  placeholder="${email}" id="email" name="email"/>
-    <input type="button" onclick="getReader()" value="Get reader>"/>
-<br>
-    <label id="result"/>
-</div>
-<%--<div class="add" onclick="addAuthors()">Send</di>v&ndash;%&gt;&lt;%&ndash;--%>
-<%--<td><a href="main?email=${email}&command=checkUser">Check</a></td>&ndash;%&gt;--%>
-<td><a href="addBook.jsp">Add reader</a></td>
 
+<%--<td><a href="main?email=${email}&command=checkUser">Check</a></td>&ndash;%&gt;--%>
+
+
+<table border="1" cellpadding="5" cellspacing="5">
+    <tr>
+        <c:forEach begin="1" end="${noOfPages}" var="i">
+            <c:choose>
+                <c:when test="${currentPage eq i}">
+                    <td>${i}</td>
+                </c:when>
+                <c:otherwise>
+                    <td><a href="getBook?page=${i}">${i}</a></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </tr>
+</table>
+<c:if test="${currentPage lt noOfPages}">
+    <td><a href="getBook?page=${currentPage + 1}">Next</a></td>
+</c:if>
 </body>
 <script>
     window.addEventListener("DOMContentLoaded", function() {
@@ -58,7 +80,6 @@
     });
 </script>
 </html>
-<%--/* reader  table--%>
 <%--
 <table class="table" id="table">
     <tr id="zag">
@@ -81,21 +102,4 @@
 <hr />
 <c:if test="${currentPage != 1}">
     <td><a href="getBook?page=${currentPage - 1}">Previous</a></td>
-</c:if>
-<table border="1" cellpadding="5" cellspacing="5">
-    <tr>
-        <c:forEach begin="1" end="${noOfPages}" var="i">
-            <c:choose>
-                <c:when test="${currentPage eq i}">
-                    <td>${i}</td>
-                </c:when>
-                <c:otherwise>
-                    <td><a href="getBook?page=${i}">${i}</a></td>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-    </tr>
-</table>
-<c:if test="${currentPage lt noOfPages}">
-    <td><a href="getBook?page=${currentPage + 1}">Next</a></td>
 </c:if>--%>

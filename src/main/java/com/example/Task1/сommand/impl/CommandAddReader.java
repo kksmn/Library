@@ -20,11 +20,18 @@ public class CommandAddReader implements ICommand {
             reader.setFirstName(request.getParameter("firstName"));
             reader.setLastName(request.getParameter("lastName"));
             reader.setEmail(request.getParameter("email"));
-            reader.setPatronymic(request.getParameter("patronymic"));
+            if (!request.getParameter("patronymic").equals("")) {
+                reader.setPatronymic(request.getParameter("patronymic"));
+            }
             reader.setDate(Date.valueOf(request.getParameter("birthDate")));
             reader.setEmail(request.getParameter("email"));
-            reader.setAddress(request.getParameter("address"));
+            if (!request.getParameter("address").equals("")) {
+                reader.setAddress(request.getParameter("address"));
+            }
             reader.setPassportNumber(request.getParameter("passportNumber"));
+            if (!request.getParameter("image").equals("")) {
+                reader.setPhotoPath(request.getParameter("image"));
+            }
             readerService.addReader(reader);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

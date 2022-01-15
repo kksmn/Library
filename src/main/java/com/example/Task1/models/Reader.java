@@ -1,15 +1,12 @@
 package com.example.Task1.models;
 
 import com.example.Task1.validator.Validator;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+@JsonPropertyOrder({"readerPhotoId","date","email","address","passportNumber","patronymic","id","firstname","lastname"})
 public class Reader {
-
-
-
-    public Validator validator;
     public Long id;
     public String firstName;
     public String lastName;
@@ -18,19 +15,17 @@ public class Reader {
     public String address;
     public String email;
     public Date date;
-    public Integer readerPhotoId;
+    public String photoPath;
 
     public Reader(){
-        validator = new Validator();
+
+    }
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-
-    public Integer getReaderPhotoId() {
-        return readerPhotoId;
-    }
-
-    public void setReaderPhotoId(Integer readerPhotoId) {
-        this.readerPhotoId = readerPhotoId;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
     public Long getId() {
@@ -47,9 +42,6 @@ public class Reader {
     }
 
     public void setFirstName(String firstName) {
-
-        boolean valid = validator.validateName(firstName);
-        if(valid)
             this.firstName = firstName;
     }
 
@@ -58,8 +50,6 @@ public class Reader {
     }
 
     public void setLastName(String lastName) {
-        boolean valid = validator.validateName(lastName);
-        if(valid)
         this.lastName = lastName;
     }
 
@@ -68,9 +58,6 @@ public class Reader {
     }
 
     public void setPatronymic(String patronymic) {
-
-        boolean valid = validator.validateName(patronymic);
-        if(valid)
             this.patronymic = patronymic;
     }
 
@@ -97,8 +84,6 @@ public class Reader {
     }
 
     public void setEmail(String email) {
-        boolean valid = validator.validateEmail(email);
-        if(valid)
         this.email = email;
     }
 

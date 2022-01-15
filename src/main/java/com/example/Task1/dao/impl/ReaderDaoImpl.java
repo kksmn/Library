@@ -36,8 +36,8 @@ public class ReaderDaoImpl implements ReaderDao {
                 reader.setAddress(resultSet.getString(5));
                 reader.setEmail(resultSet.getString(6));
                 reader.setDate(resultSet.getDate(7));
-                reader.setReaderPhotoId(resultSet.getInt(8));
-                reader.setPatronymic(resultSet.getString(9));
+                reader.setPatronymic(resultSet.getString(8));
+                reader.setPhotoPath(resultSet.getString(9));
             }
 
         }catch(SQLException e){
@@ -60,8 +60,8 @@ public class ReaderDaoImpl implements ReaderDao {
                 reader.setAddress(resultSet.getString(5));
                 reader.setEmail(resultSet.getString(6));
                 reader.setDate(resultSet.getDate(7));
-                reader.setReaderPhotoId(resultSet.getInt(8));
-                reader.setPatronymic(resultSet.getString(9));
+                reader.setPatronymic(resultSet.getString(8));
+                reader.setPhotoPath(resultSet.getString(9));
 
                 list.add(reader);
             }

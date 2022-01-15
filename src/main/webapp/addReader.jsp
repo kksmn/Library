@@ -8,20 +8,42 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
+    <script src="templates/js/validator.js"></script>
 </head>
 <body>
-<form action="main" method="post">
-
-    <input type="text" placeholder="Last name" required minlength="3"  name="lastName"/>
-    <input type="text" placeholder="First name" required minlength="3"  name="firstName"/>
-    <input type="text" placeholder="Patronymic"  minlength="3"  name="patronymic"/>
-    <input type="text" placeholder="Passport number"  minlength="3"  name="passportNumber"/>
-    <input type="date" placeholder="Birth date" required name="birthDate"/>
-    <input type="email" placeholder="Email"  minlength="3"  name="email"/>
-    <input type="text" placeholder="Address"  minlength="3"  name="address"/>
+<form action="main" method="post" onsubmit="return validate()">
+    <label>Firstname (required)</label>
+    <input type="text"  class="req" name="firstName"/>
+    <label class="errorInput" ></label>
+    <br>
+    <label>Lastname (required)</label>
+    <input type="text"  class="req"  name="lastName"/>
+    <label class="errorInput" ></label>
+    <br>
+    <label>Patronymic</label>
+    <input type="text"  name="patronymic"/>
+    <br>
+    <label>Email (required)</label>
+    <input type="email" class="req" name="email"/>
+    <label class="errorInput" ></label>
+    <br>
+    <label>Passport number (required)</label>
+    <input type="text"  class="req"  name="passportNumber"/>
+    <label class="errorInput" ></label>
+    <br>
+    <label>Birth date (required)</label>
+    <input type="date" class="req"  name="birthDate"/>
+    <label class="errorInput" ></label>
+    <br>
+    <label>Address</label>
+    <input type="text"  name="address"/>
     <input type="hidden" name="command" value="addReader" />
-
-    <input type="submit" value="Добавить">
+    <br>
+    <label>Reader image</label>
+    <input type="file" name="image" accept=".jpg,.png,.jpeg" >
+    <br>
+    <input type="submit" value="Добавить"/>
 </form>
 </body>
 </html>

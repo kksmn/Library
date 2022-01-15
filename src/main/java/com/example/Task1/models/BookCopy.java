@@ -21,6 +21,22 @@ public class BookCopy {
         return priceForDay;
     }
 
+    public Boolean getDamaged() {
+        return isDamaged;
+    }
+
+    public void setDamaged(Boolean damaged) {
+        isDamaged = damaged;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
+    }
+
     public void setPriceForDay(Double priceForDay) {
         this.priceForDay = priceForDay;
     }

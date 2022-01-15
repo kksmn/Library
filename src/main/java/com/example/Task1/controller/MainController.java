@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-@MultipartConfig(location = "/main")
+@WebServlet("/main")
 public class MainController extends HttpServlet {
     private static final long serialVersionUID = 1L;/*
 private static final Logger LOGGER = Logger.getLogger(Controller.class);*/
