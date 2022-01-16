@@ -35,24 +35,23 @@ public class OrderDaoImpl implements OrderDao {
 
     }
 
-    public void deleteOrder(Integer id) {
+    public void deleteOrder(Long id) {
         String sql = "DELETE FROM Orders WHERE copy_id=?";
-        try (PreparedStatement stmt = ConnectionPool.getInstance().getConnection().prepareStatement(sql);) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        executor.executeStatement(sql,id);
     }
 
     public List<Order> getOrdersByReaderId(Long id) {
-        String sql = "SELECT copy FROM Orders copy WHERE copy.readerid=?";
+        String sql = "SELECT * FROM Orders copy WHERE readerid=?";
         List<Order> ordersId = new ArrayList<Order>();
-        try (PreparedStatement stmt = ConnectionPool.getInstance().getConnection().prepareStatement(sql)) {
-            stmt.setLong(1, id);
-            ResultSet resultSet = stmt.executeQuery();
+        try {
+            ResultSet resultSet = executor.getResultSet(sql,id);
             while (resultSet.next()) {
-                ordersId.add((Order) resultSet.getObject("copy"));
+                Order order=new Order();
+                order.setId(resultSet.getLong(1));
+                order.setReaderId(resultSet.getLong(2));
+                order.setCopy_id(resultSet.getLong(3));
+                order.setFine(resultSet.getDouble(4));
+            /*    order.setDate(resultSet.getDate(5));*/
             }
 
         } catch (SQLException throwables) {
@@ -61,6 +60,7 @@ public class OrderDaoImpl implements OrderDao {
         return ordersId;
 
     }
+
 
     public boolean getReaderDebt(Reader reader) {
         String sql = "SELECT * FROM Orders WHERE readerid=?";

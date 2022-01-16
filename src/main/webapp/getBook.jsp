@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="templates/css/addBook.css">
     <script src="templates/js/getBook.js"></script>
     <script src="templates/js/validator.js"></script>
+    <script src="templates/js/getReader.js"></script>
 </head>
 
 <body><div>

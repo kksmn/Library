@@ -7,6 +7,6 @@ public interface BookCopyDao {
     BookCopy getCopyOfAvailableBook(Long id);
     void makeBookNotAvailable(Long id);
     void addNewCopy(Long bookId,Double price, Double priceForDay);
-    void makeBookAvailable(Integer id);
+    void makeBookAvailable(Long id);
 
 }

@@ -33,3 +33,17 @@ async function returnBook() {
         }
     };
 }
+let x = 0;
+function addInput() {
+
+    let str =
+        '<div>' +
+        '<Label>Author (required)</Label> ' +
+        '<input type="text" id="author" name="author"/>' +
+        '<Label>Author image></Label>' +
+        '<input type="file" name="authorImage" accept=".jpg,.png,.jpeg ">' +
+        '<div id="input' + (x + 1) + '"/>' +
+        '</div>';
+    document.getElementById('input' + x).innerHTML = str;
+    x++;
+}

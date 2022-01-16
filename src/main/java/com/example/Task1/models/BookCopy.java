@@ -8,6 +8,7 @@ public class BookCopy {
     public Double rating;
     public Double priceForDay;//type
     public Double price;//type
+    public Long damagedBook_id;
 
     public Double getPrice() {
         return price;
@@ -19,6 +20,14 @@ public class BookCopy {
 
     public Double getPriceForDay() {
         return priceForDay;
+    }
+
+    public Long getDamagedBook_id() {
+        return damagedBook_id;
+    }
+
+    public void setDamagedBook_id(Long damagedBook_id) {
+        this.damagedBook_id = damagedBook_id;
     }
 
     public Boolean getDamaged() {

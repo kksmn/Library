@@ -16,9 +16,9 @@ public class BookCopyDaoImpl implements BookCopyDao {
     private static final String MAKE_BOOK_NOT_AVAILABLE = "Update BookCopy SET isavailable=false WHERE id = ?";
     private static final String GET_COPY_OF_AVAILABLE_BOOK = "SELECT * FROM BOOKCOPY WHERE bookid=? AND isavailable=true ";
     private static final String ADD_NEW_BOOK_COPY = "INSERT INTO BOOKCOPY (bookid,isDamaged,isAvailable,price,priceForDay) VALUES (?,?,?,?,?)";
-    private static final String MAKE_BOOK_AVAILABLE = "Update BookCopy SET isAvailable=true WHERE book_id = ?";
-    private static final String SET_BOOK_COPY_RAITING="Update BookCopy SET raiting=? WHERE book_id = ?";
-    private static final String COUNT_COPY_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOKCOPY WHERE book_id=  ? AND isAvailable=true";
+    private static final String MAKE_BOOK_AVAILABLE = "Update BookCopy SET isavailable=true WHERE bookid = ?";
+    private static final String SET_BOOK_COPY_RAITING="Update BookCopy SET raiting=? WHERE bookid = ?";
+    private static final String COUNT_COPY_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOKCOPY WHERE bookid=  ? AND isavailable=true";
 
     public boolean isBookAvailable(Long id) {
         Boolean isAvailable = false;
@@ -66,7 +66,7 @@ public class BookCopyDaoImpl implements BookCopyDao {
             e.printStackTrace();
         }
     }
-    public void makeBookAvailable(Integer id){
+    public void makeBookAvailable(Long id){
         try{
             executor.executeStatement(MAKE_BOOK_AVAILABLE,id);
 
@@ -75,11 +75,11 @@ public class BookCopyDaoImpl implements BookCopyDao {
         }
 
     }
-   /* public void setRaiting(Long id,Double raiting) {
+    public void setRating(Long id,Double rating) {
         String sql = "Update BookCopy SET raiting=? WHERE book_id = ?";
         Integer copyId=null;
         try{
-            ResultSet resultSet=executor.getResultSet(SET_BOOK_COPY_RAITING,raiting,id);
+            ResultSet resultSet=executor.getResultSet(SET_BOOK_COPY_RAITING,rating,id);
             while(resultSet.next()){
                 copyId=resultSet.getInt("id");
             }
@@ -87,14 +87,26 @@ public class BookCopyDaoImpl implements BookCopyDao {
         }catch(SQLException e){
             e.printStackTrace();
         }
-    }*/
+    }
+    public void setDamagedBookPhoto(Long id,String path) {
+        /*String sql = "Update BookCopy SET raiting=? WHERE book_id = ?";
+        Integer copyId=null;
+        try{
+            *//*ResultSet resultSet=executor.getResultSet(SET_BOOK_COPY_RAITING,rating,id);
+            *//**//*while(resultSet.next()){
+                copyId=resultSet.getInt("id");*//*
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }*/
+    }
 
     public Long getCopyByBookId(Long id) {
         String sql = "SELECT id FROM BookCopy WHERE bookid=?";
         Long copyId=null;
-        try(PreparedStatement stmt= ConnectionPool.getInstance().getConnection().prepareStatement(sql)){
-            stmt.setLong(1, id);
-            ResultSet resultSet=stmt.executeQuery();
+        try{
+            ResultSet resultSet=executor.getResultSet(sql,id);
             while(resultSet.next()){
                 copyId=resultSet.getLong("id");
             }

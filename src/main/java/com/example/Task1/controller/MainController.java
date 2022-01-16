@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
-
-@WebServlet("/main")
+@MultipartConfig
 public class MainController extends HttpServlet {
     private static final long serialVersionUID = 1L;/*
 private static final Logger LOGGER = Logger.getLogger(Controller.class);*/

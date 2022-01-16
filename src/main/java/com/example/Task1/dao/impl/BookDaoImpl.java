@@ -158,8 +158,8 @@ public class BookDaoImpl implements BookDao {
     public Double getBookPrice(BookCopy copy) {
         Calendar calendar = getCurrentDate();
         int countOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        if(copy.getDamaged())
-        return countOfDays * copy.getPriceForDay()*0.6;
+        if (copy.getDamaged())
+            return countOfDays * copy.getPriceForDay() * 0.6;
         else return countOfDays * copy.getPriceForDay();
     }
 
@@ -288,8 +288,7 @@ public class BookDaoImpl implements BookDao {
 
                     } else if (countOrders > 2) {
                         order.setPrice(getBookPrice(copy) * 0.9);
-                    }
-                    else order.setPrice(getBookPrice(copy));
+                    } else order.setPrice(getBookPrice(copy));
                     //date doesnt work
                     orderService.addNewOrder(order);
                 }
@@ -298,8 +297,28 @@ public class BookDaoImpl implements BookDao {
 
     }
 
+    public void returnBook(String[] bookNames, Reader reader,String path,Double rating) throws SQLException, ClassNotFoundException {
+        OrderDaoImpl orderDao = new OrderDaoImpl();
+        BookCopyDaoImpl copyDao=new BookCopyDaoImpl();
+        List<Order> orderList = new ArrayList<>();
+        List<Long> copyList = new ArrayList<>();
+        orderList = orderDao.getOrdersByReaderId(reader.getId());
+        for (int i = 0; i < bookNames.length; i++) {
+            copyList.add(copyDao.getCopyByBookId(getBookByName(bookNames[i])));
+        }
+        if (orderList.size() != 0) {
+            for (Order order: orderList) {
+                for (Long id: copyList) {
+                    if (id==order.getCopy_id())
+                        copyDao.makeBookAvailable(order.getCopy_id());
+                        orderDao.deleteOrder(order.getId());
+                }
 
+            }
 
+    }
+
+}
 
 
     public int getNoOfRecords() {

@@ -11,43 +11,43 @@
 <body>
 <form action="main"  method="post" id='form' class='formWithValidation' onsubmit="return validate();">
     <div>
-        <Label>Rus Name (required)</Label>
+        <h3>Rus Name (required)</h3>
         <input type="text"  name="russianName" class="req"/>
-        <label class="errorInput" ></label>
+        <h4 class="errorInput" ></h4>
     </div>
     <div>
-        <Label>Original name</Label>
+        <h3>Original name</h3>
         <input type="text" name="originalName" id="originName"/>
-        <label for="originName" ></label>
+        <h4 for="originName" ></h4>
     </div>
     <div>
-        <Label>Price (required)</Label>
+        <h3>Price (required)</h3>
         <input type="price" placeholder="20.2" min="1.1" step="1.1"  name="price" id="price" class="req"/>
-        <label class="errorInput" ></label>
+        <h4 class="errorInput" ></h4>
 
     </div>
     <div>
-        <Label>Price per day (required)</Label>
+        <h3>Price per day (required)</h3>
         <input type="price" placeholder="2" name="priceForDay" id="pricePerDay" class="req"/>
-        <label class="errorInput" ></label>
+        <h4 class="errorInput" ></h4>
     </div>
     <div>
-        <Label>Book Copy count (required)</Label>
+        <h3>Book Copy count (required)</h3>
         <input type="number"  min="10" step="10" placeholder="10"  name="count" id="count" class="req"/>
-        <label class="errorInput" ></label>
+        <h4 class="errorInput" ></h4>
     </div>
     <div>
-        <Label>Page count</Label>
+        <h3>Page count</h3>
         <input type="number"<%-- min="1" step="10" --%> placeholder="200"  name="countPages" id="countPages"/>
-        <label class="errorInput" ></label>
+        <h4 class="errorInput" ></h4>
     </div>
     <div>
-        <Label>Year of publish</Label>
+        <h3>Year of publish</h3>
         <input type="year"  name="year" min="1800" max="2022" placeholder="2021" name="year" id="year"/>
-        <label class="errorInput" ></label>
+        <h4 class="errorInput" ></h4>
     </div>
     <div>
-        <Label>Genre (required)</Label>
+        <h3>Genre (required)</h3>
         <input type = "checkbox" class='genre' onclick='checkRequire()'  name = "genre" value = "Fantastic"> Fantasy
         <input type = "checkbox" class='genre' onclick='checkRequire()'  name = "genre" value = "Children"> Children's
         <input type = "checkbox" class='genre' onclick='checkRequire()'  name = "genre" value = "Fiction"> Fiction
@@ -63,10 +63,10 @@
     </div>
 
     <form id="authorForm">
-        <Label>Author (required)</Label>
+        <h3>Author (required)</h3>
         <input type="text"  name="authorName" class="req"/>
         <label class="errorInput"  ></label>
-        <Label>Author image></Label>
+        <h3>Author image></h3>
         <input type="file" id="authorImage" name="path" accept=".jpg,.png,.jpeg ">
 
     </form>
