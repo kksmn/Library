@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class CommandGetBookTable implements ICommand {
+    private static final Logger log = Logger.getLogger(String.valueOf(CommandAddBook.class));
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+
             BookDaoImpl bookService=new BookDaoImpl();
             BookCopyDaoImpl copyService=new BookCopyDaoImpl();
             int page = 1;
@@ -27,7 +30,7 @@ public class CommandGetBookTable implements ICommand {
             Map<Long, Book> list = bookService.getBooks(recordsPerPage,
                     (page-1)*recordsPerPage);
             for(Map.Entry<Long, Book> item : list.entrySet()){
-                copyService.countAvailableCopy(item.getValue().getId());
+                item.getValue().setCountAvailableCopies(copyService.countAvailableCopy(item.getValue().getId()));
             }
             int noOfRecords = bookService.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);

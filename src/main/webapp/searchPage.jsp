@@ -5,42 +5,42 @@
     <meta charset="UTF-8">
     <title>MyLibrary</title>
     <link rel="stylesheet" href="templates/css/mainPage.css">
+    <script src="templates/js/findBook.js"></script>
 </head>
 <body>
-<form action="main" method="post">
+<input type="text"  id="type"/>
+<form action="main" method="post" id="searchForm">
     <Label>Name</Label>
     <input type="search" name="name"/>
-    <input type="hidden" name="command" value="findBook"/>
-    <input type="submit" value="Search"/>
-</form>
 
+</form>
+<input type="button" onclick="getBook()" value="Search"/>
 <table class="table" id="table">
     <tr id="zag">
         <td class="sorted-asc">Название</td>
-        <td>Автор</td>
         <td>Жанр</td>
         <td>Год выпуска</td>
         <td>Общее количество</td>
         <td>Доступно</td>
     </tr>
     <tr>
-        <c:forEach items="${bookMap.entrySet()}" var="book" >
+        <c:forEach items="${list.entrySet()}" var="book" >
 
             <th>${book.getValue().getName() }</th>
 
-            <th><c:forEach items="${book.getValue().getAuthors()}" var="author" >
-                ${author.getAuthorName() } </c:forEach> </th>
             <th><c:forEach items="${book.getValue().getGenres()}" var="genre" >
                 ${genre.getGenreName() } </c:forEach> </th>
+
             <th>${book.getValue().getYear() }</th>
             <th>${book.getValue().getCount() }</th>
+            <th>${book.getValue().getCountAvailableCopies() }</th>
 
         </c:forEach>
     </tr>
 </table>
 <hr />
 <c:if test="${currentPage != 1}">
-    <td><a href="mainPage?page=${currentPage - 1}">Previous</a></td>
+    <td><a href="main?command=getSearchPage&page=${currentPage - 1}">Previous</a></td>
 </c:if>
 
 <table border="1" cellpadding="5" cellspacing="5">
@@ -51,15 +51,16 @@
                     <td>${i}</td>
                 </c:when>
                 <c:otherwise>
-                    <td><a href="mainPage?page=${i}">${i}</a></td>
+                    <td><a href="main?command=getSearchPage&page=${i}">${i}</a></td>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
     </tr>
 </table>
 <c:if test="${currentPage lt noOfPages}">
-    <td><a href="mainPage?page=${currentPage + 1}">Next</a></td>
+    <td><a href="main?command=getSearchPage&page=${currentPage + 1}">Next</a></td>
 </c:if>
+
 
 <script>
     window.addEventListener("DOMContentLoaded", function() {

@@ -11,5 +11,19 @@ function addInput() {
         x++;
     }
 }
+function getBook() {
+
+    let xhr = new XMLHttpRequest();
+    let email=document.getElementById("readerInput").value;
+    console.log(email);
+    let postData = JSON.stringify(email);
+    console.log(postData);
+    const form = document.getElementById("bookForm");
+    const FD = new FormData(form);
+    FD.append('email',postData);
+    xhr.open("POST", "http://localhost:8081/Task1_war/main?command=getBook");
+    xhr.send(FD);
+
+}
 
 

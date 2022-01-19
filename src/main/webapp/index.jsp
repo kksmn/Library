@@ -11,7 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="templates/page/header.jsp"/>
 <div> <a  href="main?command=getBookTable">Перейти в библиотеку</a></div>
 </body>
 </html>

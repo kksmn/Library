@@ -23,10 +23,6 @@ public class CommandGetReader implements ICommand {
             Reader reader=readerService.findReader(email);
             request.setAttribute("reader", reader);
             String json=new ObjectMapper().writeValueAsString(reader);
-            System.out.println(json);
-            List<String>list=new ArrayList<String>() ;
-            list.add(reader.getFirstName());
-            list.add(reader.getLastName());
             response.setContentType("application/json");  // Set content type of the response so that jQuery knows what it can expect.
             response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
             response.getWriter().write(json);

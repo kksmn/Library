@@ -14,6 +14,23 @@ public class Book {
     Integer countPages;
     private List<Author> authors;
     private List<Genre> genres;
+    int countAvailableCopies;
+
+    public String getRussianName() {
+        return russianName;
+    }
+
+    public void setRussianName(String russianName) {
+        this.russianName = russianName;
+    }
+
+    public int getCountAvailableCopies() {
+        return countAvailableCopies;
+    }
+
+    public void setCountAvailableCopies(int countAvailableCopies) {
+        this.countAvailableCopies = countAvailableCopies;
+    }
 
     public List<Author> getAuthors() {
         return authors;

@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class CommandAddReader implements ICommand {
+    private static final Logger log = Logger.getLogger(String.valueOf(CommandAddReader.class));
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -33,6 +36,7 @@ public class CommandAddReader implements ICommand {
                 reader.setPhotoPath(request.getParameter("image"));
             }
             readerService.addReader(reader);
+            log.info("New book was added");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -1,11 +1,8 @@
 package com.example.Task1.dao.impl;
 
 import com.example.Task1.dao.BookCopyDao;
-import com.example.Task1.dao.impl.QueryExecutor;
-import com.example.Task1.dao.pool.ConnectionPool;
 import com.example.Task1.models.BookCopy;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,9 +13,12 @@ public class BookCopyDaoImpl implements BookCopyDao {
     private static final String MAKE_BOOK_NOT_AVAILABLE = "Update BookCopy SET isavailable=false WHERE id = ?";
     private static final String GET_COPY_OF_AVAILABLE_BOOK = "SELECT * FROM BOOKCOPY WHERE bookid=? AND isavailable=true ";
     private static final String ADD_NEW_BOOK_COPY = "INSERT INTO BOOKCOPY (bookid,isDamaged,isAvailable,price,priceForDay) VALUES (?,?,?,?,?)";
-    private static final String MAKE_BOOK_AVAILABLE = "Update BookCopy SET isavailable=true WHERE bookid = ?";
-    private static final String SET_BOOK_COPY_RAITING="Update BookCopy SET raiting=? WHERE bookid = ?";
+    private static final String MAKE_BOOK_AVAILABLE = "Update BookCopy SET isavailable=true WHERE id = ?";
     private static final String COUNT_COPY_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOKCOPY WHERE bookid=  ? AND isavailable=true";
+    private static final String ADD_NEW_DAMAGED_PHOTO = "INSERT INTO DAMAGEDBOOK_PHOTO (path) VALUES (?)";
+    private static final String SET_BOOK_RATING = "Update BookCopy SET rating=? WHERE book_id = ?";
+    private static final String SET_DAMAGED_BOOK = "Update BookCopy SET damagedBook_id=? WHERE id = ?";
+    private static final String SET_COPY_BY_ID = "SELECT id FROM BookCopy WHERE bookid=?";
 
     public boolean isBookAvailable(Long id) {
         Boolean isAvailable = false;
@@ -76,10 +76,27 @@ public class BookCopyDaoImpl implements BookCopyDao {
 
     }
     public void setRating(Long id,Double rating) {
-        String sql = "Update BookCopy SET raiting=? WHERE book_id = ?";
+
+        Integer copyId=null;
+        executor.executeStatement(SET_BOOK_RATING,rating,id);
+
+    }
+    public Long setDamagedBookPhoto(String path) {
+        int copyId=0;
+        try{
+             copyId=executor.executeStatement(ADD_NEW_DAMAGED_PHOTO,path);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Long.valueOf(copyId);
+    }
+    public void addDamagePhoto(Long id,Long bookId) {
+
         Integer copyId=null;
         try{
-            ResultSet resultSet=executor.getResultSet(SET_BOOK_COPY_RAITING,rating,id);
+            ResultSet resultSet=executor.getResultSet(SET_DAMAGED_BOOK,id,bookId);
             while(resultSet.next()){
                 copyId=resultSet.getInt("id");
             }
@@ -88,25 +105,12 @@ public class BookCopyDaoImpl implements BookCopyDao {
             e.printStackTrace();
         }
     }
-    public void setDamagedBookPhoto(Long id,String path) {
-        /*String sql = "Update BookCopy SET raiting=? WHERE book_id = ?";
-        Integer copyId=null;
-        try{
-            *//*ResultSet resultSet=executor.getResultSet(SET_BOOK_COPY_RAITING,rating,id);
-            *//**//*while(resultSet.next()){
-                copyId=resultSet.getInt("id");*//*
-            }
-
-        }catch(SQLException e){
-            e.printStackTrace();
-        }*/
-    }
 
     public Long getCopyByBookId(Long id) {
-        String sql = "SELECT id FROM BookCopy WHERE bookid=?";
+
         Long copyId=null;
         try{
-            ResultSet resultSet=executor.getResultSet(sql,id);
+            ResultSet resultSet=executor.getResultSet(SET_COPY_BY_ID,id);
             while(resultSet.next()){
                 copyId=resultSet.getLong("id");
             }

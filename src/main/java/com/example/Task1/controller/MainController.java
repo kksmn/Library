@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 @MultipartConfig
 public class MainController extends HttpServlet {
-    private static final long serialVersionUID = 1L;/*
-private static final Logger LOGGER = Logger.getLogger(Controller.class);*/
+    private static final long serialVersionUID = 1L;
+    private static final Logger log = Logger.getLogger(String.valueOf(MainController.class));
 
     private void process(final HttpServletRequest request, final HttpServletResponse response)
             throws IOException, ServletException {
@@ -24,7 +25,6 @@ private static final Logger LOGGER = Logger.getLogger(Controller.class);*/
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-/*LOGGER.info("===================GET works");*/
         request.setCharacterEncoding("UTF-8");
         process(request, response);
     }

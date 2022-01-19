@@ -1,3 +1,4 @@
+/*
 let x = 0;
 function addDefectsInput() {
     let str =
@@ -23,27 +24,50 @@ async function returnBook() {
     xhr.setRequestHeader("Content-Type", "application/json");
     let data = JSON.stringify({"email": inputEmailData, "names": inputrusNameData});
     xhr.send(data);
-
-    // когда придёт ответ на наше обращение к серверу, мы его обработаем здесь
     xhr.onreadystatechange = function () {
-        // если запрос принят и сервер ответил, что всё в порядке
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // выводим то, что ответил нам сервер — так мы убедимся, что данные он получил правильно
             result.innerHTML = this.responseText;
         }
     };
 }
 let x = 0;
+
 function addInput() {
 
     let str =
-        '<div>' +
+        '<form>' +
         '<Label>Author (required)</Label> ' +
-        '<input type="text" id="author" name="author"/>' +
+        '<input type="text" id="authorName" name="authorName" class="req"/>' +
         '<Label>Author image></Label>' +
         '<input type="file" name="authorImage" accept=".jpg,.png,.jpeg ">' +
         '<div id="input' + (x + 1) + '"/>' +
-        '</div>';
+        '</form>';
+    document.getElementById('input' + x).innerHTML = str;
+    x++;
+}
+
+*/
+function addAuthors() {
+
+    let xhr = new XMLHttpRequest();
+    const form = document.getElementById("authorForm");
+    const FD = new FormData(form);
+    xhr.open("POST", "http://localhost:8081/Task1_war/main?command=addAuthor");
+    xhr.send(FD);
+
+}
+let x = 0;
+
+function addInput() {
+
+    let str =
+        '<form>' +
+        '<Label>Author (required)</Label> ' +
+        '<input type="text" id="authorName" name="authorName" class="req"/>' +
+        '<Label>Author image></Label>' +
+        '<input type="file" name="authorImage" accept=".jpg,.png,.jpeg ">' +
+        '<div id="input' + (x + 1) + '"/>' +
+        '</form>';
     document.getElementById('input' + x).innerHTML = str;
     x++;
 }

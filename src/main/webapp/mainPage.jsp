@@ -30,13 +30,14 @@
 
             <th>${book.getValue().getYear() }</th>
             <th>${book.getValue().getCount() }</th>
+            <th>${book.getValue().getCountAvailableCopies() }</th>
 
     </c:forEach>
     </tr>
 </table>
 <hr />
 <c:if test="${currentPage != 1}">
-    <td><a href="mainPage?page=${currentPage - 1}">Previous</a></td>
+    <td><a href="main?command=getBookTable&page=${currentPage - 1}">Previous</a></td>
 </c:if>
 
 <table border="1" cellpadding="5" cellspacing="5">
@@ -47,14 +48,14 @@
                     <td>${i}</td>
                 </c:when>
                 <c:otherwise>
-                    <td><a href="mainPage?page=${i}">${i}</a></td>
+                    <td><a href="main?command=getBookTable&page=${i}">${i}</a></td>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
     </tr>
 </table>
 <c:if test="${currentPage lt noOfPages}">
-    <td><a href="mainPage?page=${currentPage + 1}">Next</a></td>
+    <td><a href="main?command=getBookTable&page=${currentPage + 1}">Next</a></td>
 </c:if>
 
 <script>

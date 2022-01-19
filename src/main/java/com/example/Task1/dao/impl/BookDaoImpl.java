@@ -15,6 +15,9 @@ public class BookDaoImpl implements BookDao {
     private static final String COUNT_BOOK_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOK";
     private static final String GET_BOOK_BY_ID = "SELECT russianname FROM BOOK WHERE id=?";
     private static final String UPDATE_USER = "UPDATE users SET password = ?, email = ? WHERE id = ?";
+    private static final String GET_BOOK_BY_NAME = "SELECT id FROM BOOK WHERE russianname=? limit 1";
+    private static final String GET_BOOKS="SELECT * FROM Book limit ? OFFSET ?";
+    private static final String GET_COPY_BY_BOOK = "SELECT bookid FROM BookCopy WHERE book_id=?";
     GenreDaoImpl genreService;
     AuthorDaoImpl authorService;
     ReaderDaoImpl readerService;
@@ -61,6 +64,40 @@ public class BookDaoImpl implements BookDao {
 
         return bookMap;
     }
+    public List<Book> getBookList(String bookName) {
+        List< Book> bookMap = new ArrayList<>();
+        try {
+            ResultSet resultSet = executor.getResultSet(SELECT_FROM_BOOK, bookName);
+            while (resultSet.next()) {
+                Book book = new Book();
+                List<Author> authors = new ArrayList<>();
+                List<Genre> genres = new ArrayList<>();
+                book.setId(resultSet.getLong("id"));
+                book.setBookPictureId(resultSet.getLong("bookpicture_id"));
+                book.setName(resultSet.getString("russianname"));
+                book.setYear(resultSet.getInt("year"));
+                book.setCount(resultSet.getInt("count"));
+                for (Long id : authorService.findAuthorIdByBook(book.getId())) {
+                    authors.add(authorService.getAuthorById(id));
+                }
+                /*for (Long id : genreService.getGenreIdByBookId(book.getId())) {
+                    genres.add(genreService.getGenreById(id));
+                }
+                bookMap.put(book.getId(), book);*/
+                book.setAuthors(authors);
+                book.setGenres(genres);
+                bookMap.add(book);
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookMap;
+    }
+
 
     public String getBookById(Long id) {
         String bookName = null;
@@ -95,10 +132,10 @@ public class BookDaoImpl implements BookDao {
     }
 
     public Long getBookByName(String bookName) {
-        String sqlQuery = "SELECT id FROM BOOK WHERE russianname=? limit 1";
+        
         Long id = null;
         try {
-            ResultSet resultSet = executor.getResultSet(sqlQuery, bookName);
+            ResultSet resultSet = executor.getResultSet(GET_BOOK_BY_NAME, bookName);
             while (resultSet.next()) {
                 id = resultSet.getLong("id");
             }
@@ -206,11 +243,11 @@ public class BookDaoImpl implements BookDao {
 
 
     public Map<Long, Book> getBooks(int start, int total) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM Book limit ? OFFSET ?";
+
         Map<Long, Book> bookMap = new HashMap<>();
         GenreDaoImpl genreService = new GenreDaoImpl();
         try {
-            ResultSet resultSet = executor.getResultSet(sql, start, total);
+            ResultSet resultSet = executor.getResultSet(GET_BOOKS, start, total);
             while (resultSet.next()) {
                 Book book = new Book();
                 book.setId(resultSet.getLong(1));
@@ -242,8 +279,8 @@ public class BookDaoImpl implements BookDao {
     //лучше списком или по одному
     public Integer getBookByCopyId(Integer copyId) {
         Integer id = null;
-        String sql = "SELECT bookid FROM BookCopy WHERE book_id=?";
-        try (PreparedStatement stmt = ConnectionPool.getInstance().getConnection().prepareStatement(sql)) {
+
+        try (PreparedStatement stmt = ConnectionPool.getInstance().getConnection().prepareStatement(GET_COPY_BY_BOOK)) {
             stmt.setInt(1, copyId);
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
@@ -312,6 +349,15 @@ public class BookDaoImpl implements BookDao {
                     if (id==order.getCopy_id())
                         copyDao.makeBookAvailable(order.getCopy_id());
                         orderDao.deleteOrder(order.getId());
+                        if (!path.equals("")){
+                            Long photoId=copyDao.setDamagedBookPhoto(path);
+                            copyDao.addDamagePhoto(photoId,id);
+                        }
+                        if (rating!=0.0){
+                        copyDao.setRating(id,rating);
+                        }
+
+
                 }
 
             }

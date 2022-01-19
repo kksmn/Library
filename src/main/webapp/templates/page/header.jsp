@@ -4,5 +4,5 @@
     <a href="addReader.jsp">Добавить читателя</a>
     <a  href="getBook.jsp">Взять книгу</a>
     <a  href="returnBook.jsp">Вернуть книгу</a>
-    <a  href="searchPage.jsp">Поиск</a>
+    <a   href="main?command=getSearchPage">Поиск</a>
 </header>

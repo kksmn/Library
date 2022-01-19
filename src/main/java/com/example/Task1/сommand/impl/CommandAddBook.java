@@ -1,5 +1,6 @@
 package com.example.Task1.сommand.impl;
 
+import com.example.Task1.controller.MainController;
 import com.example.Task1.dao.impl.AuthorDaoImpl;
 import com.example.Task1.dao.impl.BookCopyDaoImpl;
 import com.example.Task1.dao.impl.BookDaoImpl;
@@ -17,8 +18,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CommandAddBook implements ICommand {
+    private static final Logger log = Logger.getLogger(String.valueOf(CommandAddBook.class));
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,8 +33,8 @@ public class CommandAddBook implements ICommand {
         request.setCharacterEncoding("UTF-8");
         Book book = new Book();
         List<Genre> genreList;
-        List<Long> authorList = new ArrayList<>();
-        String path = request.getParameter("image");
+        List<Long> authorList = new ArrayList<>();/*
+        String path = request.getParameter("image");*/
         String[] genres = request.getParameterValues("genre");
         String[] authors = request.getParameterValues("authorName");
         if (!request.getParameter("originalName").equals("")) {
@@ -45,9 +49,9 @@ public class CommandAddBook implements ICommand {
         Double price = Double.valueOf(request.getParameter("price"));
         Double priceForDay = Double.valueOf(request.getParameter("priceForDay"));
         genreList=genreService.addNewGenres( genres);
-        book.setGenres(genreList);
-        Long bookId = bookService.addNewBook(book, path);
-        genreService.addGenreToBook(bookId,genreList);
+        book.setGenres(genreList);/*
+        Long bookId = bookService.addNewBook(book, path);*/
+        /*genreService.addGenreToBook(bookId,genreList);
         for (int i=0;i<authors.length;i++) {
             authorList.add(authorService.getAuthorByName(authors[i]));
         }
@@ -55,8 +59,9 @@ public class CommandAddBook implements ICommand {
         for(int i=0;i<book.getCount();i++) {
             bookCopyService.addNewCopy(bookId, price, priceForDay);
         }
+        log.info("New book was added");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("mainPage.jsp");
-        requestDispatcher.forward(request, response);
+        requestDispatcher.forward(request, response);*/
 
     }
 }

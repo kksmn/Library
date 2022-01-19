@@ -4,21 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="templates/css/addBook.css">
-    <script src="templates/js/returnBooks.js"></script>
+    <script src="templates/js/returnBook.js"></script>
+    <script src="templates/js/getReader.js"></script>
+
     <script src="templates/js/validator.js"></script>
 </head>
 <body>
-<form id="bookForm">
-    <h3>Rus name</h3>
-    <input type="text"  name="rusname" class="req"/>
-    <input type="text" class="errorInput"  ></input>
-    <h3>Rating></h3>
-    <input type="number" name="rating"></input>
-    <h3>Defects</h3>
-    <input type="file" id="authorImage" name="path" accept=".jpg,.png,.jpeg ">
+<form id="readerForm">
+    <label>Email</label>
+    <input type="text"   id="email" name="email" class="readerInput"/>
+    <label class="errorInput" ></label>
+    <input type="button" onclick="getReader()" value="Get reader"/>
+    <br>
+    <input type="text" id="readerInput" name="email"></input>
+
+</form>
+<form id="authorForm">
+    <h3>Author (required)</h3>
+    <input type="text" name="authorName" id="authorName" class="req"/>
+    <h3>Image</h3>
+    <input type="file" name="path">
     <div id="input0"></div>
 </form>
 
-<div class="add" onclick="addInput()">+</div>
+<div class="add" onclick="addAuthors()">Send</div>
+<div class="add" onclick="addInput()">add input</div>
 </body>
 </html>

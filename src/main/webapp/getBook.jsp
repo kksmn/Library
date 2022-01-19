@@ -8,31 +8,31 @@
     <script src="templates/js/getReader.js"></script>
 </head>
 
-<body><div>
+<body>
+<form id="readerForm">
     <label>Email</label>
-    <input type="text"  placeholder="${email}" id="email" name="email" class="readerInput"/>
+    <input type="text"   id="email" name="email" class="readerInput"/>
     <label class="errorInput" ></label>
     <input type="button" onclick="getReader()" value="Get reader"/>
     <br>
-    <Label id="readerInput"></Label>
-</div>
+    <input type="text" id="readerInput" name="email"></input>
+
+</form>
 <br>
 <td><a href="addBook.jsp" >Add reader</a></td>
 <br>
-<form action="main" method="post" onsubmit="return validate()">
+<form action="main" name="bookForm" method="post" onsubmit="return validate()">
     <Label>Rus name</Label>
 <hr>
     <input type="text"  name="bookName" class="req"/>
     <label class="errorInput" ></label>
+
     <div id="input0"></div>
     <div class="add" onclick="addInput()">One more</div>
     <input type="hidden" name="command" value="getBook"/>
-    <input type="hidden" name="email" value="${email}"/>
+    <input type="hidden" id="emailInput" name="email"></input>
     <input type="submit" value="Get">
 </form>
-
-<%--<td><a href="main?email=${email}&command=checkUser">Check</a></td>&ndash;%&gt;--%>
-
 
 <table border="1" cellpadding="5" cellspacing="5">
     <tr>
@@ -52,7 +52,7 @@
     <td><a href="getBook?page=${currentPage + 1}">Next</a></td>
 </c:if>
 </body>
-<script>
+<%--<script>
     window.addEventListener("DOMContentLoaded", function() {
         (function(f) {
             function g(c) {
@@ -79,7 +79,7 @@
             })
         })(".table")
     });
-</script>
+</script>--%>
 </html>
 <%--
 <table class="table" id="table">

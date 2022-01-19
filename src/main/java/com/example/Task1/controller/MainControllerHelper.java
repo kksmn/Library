@@ -23,6 +23,8 @@ public class MainControllerHelper {
         commands.put("returnBook", new CommandReturnBook());
         commands.put("addAuthor", new CommandAddAuthor());
         commands.put("checkUser", new CommandCheckUser());
+        commands.put("getSearchPage", new CommandGetSearchPage());
+        commands.put("getSearch", new CommandGetSearch());
     }
 
     public ICommand getCommand(HttpServletRequest request) {

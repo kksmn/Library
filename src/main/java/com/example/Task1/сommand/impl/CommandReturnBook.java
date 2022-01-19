@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class CommandReturnBook implements ICommand {
+    private static final Logger log = Logger.getLogger(String.valueOf(CommandReturnBook.class));
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -36,6 +39,7 @@ public class CommandReturnBook implements ICommand {
         } finally {
 
         }
+        log.info("New book was returned");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("returnBook.jsp");
         requestDispatcher.forward(request, response);
     }
