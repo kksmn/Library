@@ -51,32 +51,42 @@
         <h3>Genre (required)</h3>
         <div>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fantastic"> Fantasy
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Children"> Children's
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fiction"> Fiction
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Detective "> Detective
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Historical "> Historical
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Horror"> Horror
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Science"> Science
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Biography "> Biography
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Science"> Science
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Drama "> Drama
+            <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Poetry"> Poetry
         </div>
     </div>
-    <input type="text" id="genreError"/>
+    <span class="error" id="genreError"/>
     <div>
         <h3>Year of publish</h3>
         <input type="year" name="year" placeholder="2021" name="year" id="year"/>
     </div>
 <div id="inputAuthor0">
-    <input type="text" id="isAuthor">
+    <input type="hidden" id="isAuthor">
 </div>
     <input type="hidden" name="command" value="addBook"/>
     <input type="submit" class='validateBtn' value="Добавить"/>
 </form>
 <br>
 <form id="authorForm">
-    <input type="text" id="input"></input>
+    <input type="text" class="showAuthor" id="input"></input>
     <div>
         <h3>Author (required)</h3>
         <input type="text" id="authorName" name="author" />
