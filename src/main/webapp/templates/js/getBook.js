@@ -14,15 +14,21 @@ function addInput() {
 function getBook() {
 
     let xhr = new XMLHttpRequest();
-    let email=document.getElementById("readerInput").value;
-    console.log(email);
-    let postData = JSON.stringify(email);
-    console.log(postData);
     const form = document.getElementById("bookForm");
     const FD = new FormData(form);
-    FD.append('email',postData);
     xhr.open("POST", "http://localhost:8081/Task1_war/main?command=getBook");
     xhr.send(FD);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let myArr = JSON.parse(xhr.responseText);
+            console.log(myArr);
+            let price=myArr[0].price+myArr[1].price
+            console.log(price);
+            document.getElementById("price").value =price;
+
+
+        }
+    };
 
 }
 

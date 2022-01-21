@@ -12,7 +12,7 @@ public class BookCopyDaoImpl implements BookCopyDao {
     private static final String CHECK_IS_BOOK_AVAILABLE =  "SELECT isAvailable FROM BookCopy WHERE id=?";
     private static final String MAKE_BOOK_NOT_AVAILABLE = "Update BookCopy SET isavailable=false WHERE id = ?";
     private static final String GET_COPY_OF_AVAILABLE_BOOK = "SELECT * FROM BOOKCOPY WHERE bookid=? AND isavailable=true ";
-    private static final String ADD_NEW_BOOK_COPY = "INSERT INTO BOOKCOPY (bookid,isDamaged,isAvailable,price,priceForDay) VALUES (?,?,?,?,?)";
+    private static final String ADD_NEW_BOOK_COPY = "INSERT INTO BOOKCOPY (bookid,price,priceForDay,isavailable,isdamaged) VALUES (?,?,?,?,?)";
     private static final String MAKE_BOOK_AVAILABLE = "Update BookCopy SET isavailable=true WHERE id = ?";
     private static final String COUNT_COPY_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOKCOPY WHERE bookid=  ? AND isavailable=true";
     private static final String ADD_NEW_DAMAGED_PHOTO = "INSERT INTO DAMAGEDBOOK_PHOTO (path) VALUES (?)";
@@ -60,8 +60,10 @@ public class BookCopyDaoImpl implements BookCopyDao {
     }
 
     public void addNewCopy(Long bookId,Double price, Double priceForDay){
+        boolean isDamaged=false;
+        boolean isAvailable=true;
         try{
-            executor.executeStatement(ADD_NEW_BOOK_COPY,bookId,price,priceForDay);
+            executor.executeStatement(ADD_NEW_BOOK_COPY,bookId,price,priceForDay,isAvailable,isDamaged);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -73,14 +73,7 @@ public class GenreDaoImpl implements GenreDao {
 
     public void addNewGenre(Long book_id, Long genre_id) {
         String sql = "INSERT INTO genre_book (book_id, genre_id) VALUES (?, ?)";
-        try (PreparedStatement stmt = ConnectionPool.getInstance().getConnection().prepareStatement(sql)) {
-            stmt.setLong(1, book_id);
-            stmt.setLong(2, genre_id);
-
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        executor.executeStatement(sql,book_id,genre_id);
     }
 
     public List<Genre> addNewGenres(String[] genres) {

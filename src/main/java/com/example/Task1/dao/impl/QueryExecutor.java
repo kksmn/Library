@@ -13,7 +13,7 @@ public class QueryExecutor {
 
     private static QueryExecutor instance = null;
 
-    private Connection getConnection() {
+    public Connection getConnection() {
         return ConnectionPool.getInstance().getConnection();
     }
 

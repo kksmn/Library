@@ -1,6 +1,7 @@
 package com.example.Task1.models;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Order {
     public Long id;
@@ -8,7 +9,7 @@ public class Order {
     public Double price;
     public Long copy_id;
     public Double fine;
-    public Calendar date;
+    public Date date;
     public Double rating;
 
     public Double getRating() {
@@ -59,11 +60,11 @@ public class Order {
         this.fine = fine;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

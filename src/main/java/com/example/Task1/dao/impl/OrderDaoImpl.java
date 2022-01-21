@@ -49,9 +49,12 @@ public class OrderDaoImpl implements OrderDao {
                 Order order=new Order();
                 order.setId(resultSet.getLong(1));
                 order.setReaderId(resultSet.getLong(2));
-                order.setCopy_id(resultSet.getLong(3));
-                order.setFine(resultSet.getDouble(4));
-            /*    order.setDate(resultSet.getDate(5));*/
+                order.setFine(resultSet.getDouble(3));
+                order.setDate(resultSet.getDate(4));
+                order.setPrice(resultSet.getDouble(5));
+                order.setCopy_id(resultSet.getLong(6));
+
+                ordersId.add(order);
             }
 
         } catch (SQLException throwables) {

@@ -5,19 +5,27 @@ import com.example.Task1.dao.pool.ConnectionPool;
 import com.example.Task1.models.*;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.*;
 import java.util.*;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 public class BookDaoImpl implements BookDao {
 
     private QueryExecutor executor = QueryExecutor.getInstance();
 
+    private static final String ADD_NEW_BOOK = "INSERT INTO BOOK (russianname, originalname,count,registrationdate,countpages,year) VALUES (?, ?,?,?,?,?)";
     private static final String SELECT_FROM_BOOK = "SELECT * FROM BOOK WHERE russianname=?";
     private static final String COUNT_BOOK_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOK";
     private static final String GET_BOOK_BY_ID = "SELECT russianname FROM BOOK WHERE id=?";
     private static final String UPDATE_USER = "UPDATE users SET password = ?, email = ? WHERE id = ?";
     private static final String GET_BOOK_BY_NAME = "SELECT id FROM BOOK WHERE russianname=? limit 1";
-    private static final String GET_BOOKS="SELECT * FROM Book limit ? OFFSET ?";
+    private static final String GET_BOOKS = "SELECT * FROM Book limit ? OFFSET ?";
     private static final String GET_COPY_BY_BOOK = "SELECT bookid FROM BookCopy WHERE book_id=?";
+    private static final String ADD_NEW_PHOTO = "INSERT INTO BOOKPICTURE(book_id,bookpicturepath) values (?,?)";
     GenreDaoImpl genreService;
     AuthorDaoImpl authorService;
     ReaderDaoImpl readerService;
@@ -33,6 +41,15 @@ public class BookDaoImpl implements BookDao {
         orderService = new OrderDaoImpl();
     }
 
+    public void addNewPicture(Long bookId, String path) {
+        try {
+            executor.executeStatement(ADD_NEW_PHOTO, bookId, path);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     public Map<Long, Book> getBookMap(String bookName) {
         Map<Long, Book> bookMap = new HashMap<>();
         try {
@@ -42,7 +59,6 @@ public class BookDaoImpl implements BookDao {
                 List<Author> authors = new ArrayList<>();
                 List<Genre> genres = new ArrayList<>();
                 book.setId(resultSet.getLong("id"));
-                book.setBookPictureId(resultSet.getLong("bookpicture_id"));
                 book.setName(resultSet.getString("russianname"));
                 book.setYear(resultSet.getInt("year"));
                 book.setCount(resultSet.getInt("count"));
@@ -64,8 +80,9 @@ public class BookDaoImpl implements BookDao {
 
         return bookMap;
     }
+
     public List<Book> getBookList(String bookName) {
-        List< Book> bookMap = new ArrayList<>();
+        List<Book> bookMap = new ArrayList<>();
         try {
             ResultSet resultSet = executor.getResultSet(SELECT_FROM_BOOK, bookName);
             while (resultSet.next()) {
@@ -73,7 +90,6 @@ public class BookDaoImpl implements BookDao {
                 List<Author> authors = new ArrayList<>();
                 List<Genre> genres = new ArrayList<>();
                 book.setId(resultSet.getLong("id"));
-                book.setBookPictureId(resultSet.getLong("bookpicture_id"));
                 book.setName(resultSet.getString("russianname"));
                 book.setYear(resultSet.getInt("year"));
                 book.setCount(resultSet.getInt("count"));
@@ -131,20 +147,20 @@ public class BookDaoImpl implements BookDao {
         return id;
     }
 
-    public Long getBookByName(String bookName) {
-        
-        Long id = null;
+    public List<Long> getBookByName(String bookName) {
+
+        List<Long> list = new ArrayList<>();
         try {
             ResultSet resultSet = executor.getResultSet(GET_BOOK_BY_NAME, bookName);
             while (resultSet.next()) {
-                id = resultSet.getLong("id");
+                list.add(resultSet.getLong("id"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return id;
+        return list;
     }
 
 
@@ -167,10 +183,10 @@ public class BookDaoImpl implements BookDao {
 
     }
 
-    public Calendar getDateForReading() {
+    public Date getDateForReading() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, 1);
-        return cal;
+        return cal.getTime();
     }
 
     public Calendar getCurrentDate() {
@@ -200,45 +216,38 @@ public class BookDaoImpl implements BookDao {
         else return countOfDays * copy.getPriceForDay();
     }
 
-    //дату установить
-    public Long addNewBook(Book book, String path) {
-        // int affectedRows = statement.executeUpdate();
-        //
-        //        if (affectedRows == 0) {
-        //            throw new SQLException("Creating user failed, no rows affected.");
-        //        }
-        String sql = "INSERT INTO BOOK (russianname, originalname,count,bookpicture_id ,year,countpages ) VALUES (?, ?,?,?,?,?) RETURNING id";
-        String sqlQuery = "INSERT INTO BOOKPICTURE (bookPicturePath) VALUES (?) RETURNING id";
-        Long id = null;
-        Long pathId = null;
-        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
-            try (PreparedStatement stmt = connection.prepareStatement(sqlQuery)) {
-                stmt.setString(1, path);
-                stmt.execute();
-                ResultSet resultSet = stmt.getResultSet();
-                if (resultSet.next()) {
-                    pathId = resultSet.getLong(1);
-                }
+    public Long addNewBook(Book book) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        LocalDate date = LocalDate.now();
+        int id = 0;
+        try {
+            con = executor.getConnection();
+            ps = con.prepareStatement(ADD_NEW_BOOK, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, book.getRussianName());
+            ps.setString(2, book.getOriginalName());
+            ps.setInt(3, book.getCount());
+            ps.setDate(4, java.sql.Date.valueOf(date));
+            if (book.getCountPages() != null) {
+                ps.setInt(5, book.getCountPages());
+            } else {
+                ps.setNull(5, Types.INTEGER);
             }
-            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-                stmt.setString(1, book.getName());
-                stmt.setString(2, book.getOriginalName());
-                stmt.setInt(3, book.getCount());
-                stmt.setLong(4, pathId);
-                stmt.setInt(5, book.getYear());
-                //Date date = new Date();
-                //stmt.setDate(7, (java.sql.Date) date);
-                stmt.setInt(6, book.getCountPages());
-                stmt.execute();
-                ResultSet lastBook = stmt.getResultSet();
-                if (lastBook.next()) {
-                    id = lastBook.getLong(1);
-                }
+            if (book.getBookYear() != null) {
+                ps.setDate(6, java.sql.Date.valueOf(book.getBookYear()));
+            } else {
+                ps.setNull(6, Types.DATE);
             }
-        } catch (SQLException e) {
+
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            rs.next();
+            id = rs.getInt(1);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return Long.valueOf(id);
     }
 
 
@@ -254,10 +263,9 @@ public class BookDaoImpl implements BookDao {
                 book.setName(resultSet.getString(2));
                 book.setOriginalName(resultSet.getString(3));
                 book.setCount(resultSet.getInt(4));
-                book.setBookPictureId(resultSet.getLong(5));
-                book.setRegistrationDate(resultSet.getDate(6));
-                book.setCountPages(resultSet.getInt(7));
-                book.setYear(resultSet.getInt(8));
+                book.setRegistrationDate(resultSet.getDate(5));
+                book.setCountPages(resultSet.getInt(6));
+                book.setYear(resultSet.getInt(7));
                 List<Long> genresId = genreService.getGenreIdByBookId(book.getId());
                 List<Genre> genres = new ArrayList<>();
                 for (Long id : genresId) {
@@ -294,14 +302,14 @@ public class BookDaoImpl implements BookDao {
 
     }
 
-    public void getBook(String[] bookNames, Reader reader) throws SQLException, ClassNotFoundException {
+    public Order getBook(String bookName, Reader reader) throws SQLException, ClassNotFoundException {
         int countOrders = 0;
+        Order returnOrder = new Order();
         List<BookCopy> copyList = new ArrayList<>();
         if (!orderService.getReaderDebt(reader)) {
             List<Long> list = new ArrayList<>();
-            for (int i = 0; i < bookNames.length; i++) {
-                list.add(getBookByName(bookNames[i]));
-            }
+            list = getBookByName(bookName);
+
             for (Long id : list) {
                 copyList.add(bookCopyService.getCopyOfAvailableBook(id));
             }
@@ -328,43 +336,59 @@ public class BookDaoImpl implements BookDao {
                     } else order.setPrice(getBookPrice(copy));
                     //date doesnt work
                     orderService.addNewOrder(order);
+                    returnOrder = order;
                 }
             }
         }
 
+        return returnOrder;
     }
 
-    public void returnBook(String[] bookNames, Reader reader,String path,Double rating) throws SQLException, ClassNotFoundException {
+    public Order returnBook(String bookName, Reader reader, List<String> images, Double rating, Date date) throws SQLException, ClassNotFoundException, ParseException {
         OrderDaoImpl orderDao = new OrderDaoImpl();
-        BookCopyDaoImpl copyDao=new BookCopyDaoImpl();
+        BookCopyDaoImpl copyDao = new BookCopyDaoImpl();
         List<Order> orderList = new ArrayList<>();
+        List<Long> list = new ArrayList<>();
         List<Long> copyList = new ArrayList<>();
+        Order userOrder = new Order();
         orderList = orderDao.getOrdersByReaderId(reader.getId());
-        for (int i = 0; i < bookNames.length; i++) {
-            copyList.add(copyDao.getCopyByBookId(getBookByName(bookNames[i])));
+        list = getBookByName(bookName);
+        for (Long id : list) {
+            copyList.add(copyDao.getCopyByBookId(id));
         }
         if (orderList.size() != 0) {
-            for (Order order: orderList) {
-                for (Long id: copyList) {
-                    if (id==order.getCopy_id())
+            for (Order order : orderList) {
+                for (Long id : copyList) {
+                    userOrder = order;
+                    if (id == order.getCopy_id()) {
                         copyDao.makeBookAvailable(order.getCopy_id());
-                        orderDao.deleteOrder(order.getId());
-                        if (!path.equals("")){
-                            Long photoId=copyDao.setDamagedBookPhoto(path);
-                            copyDao.addDamagePhoto(photoId,id);
-                        }
-                        if (rating!=0.0){
-                        copyDao.setRating(id,rating);
-                        }
+                        /* orderDao.deleteOrder(order.getId());*/
+                        if (images.size() != 0) {
+                            for (String path : images) {
+                                Long photoId = copyDao.setDamagedBookPhoto(path);
+                                copyDao.addDamagePhoto(photoId, id);
+                            }
 
-
+                        }
+                        if (rating != 0.0) {
+                            copyDao.setRating(id, rating);
+                        }
+                        Date orderDate = order.getDate();
+                        long diffInMillies = date.getTime() - orderDate.getTime();
+                        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                        if (diff > 0) {
+                            Double price = order.getPrice();
+                            order.setFine((price * 0.1) * diff);
+                        }
+                    }
                 }
 
             }
 
-    }
+        }
 
-}
+        return userOrder;
+    }
 
 
     public int getNoOfRecords() {

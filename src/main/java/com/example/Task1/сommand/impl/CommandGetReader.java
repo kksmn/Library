@@ -18,20 +18,20 @@ public class CommandGetReader implements ICommand {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            ReaderDaoImpl readerService=new ReaderDaoImpl();
-            String email=(request.getParameter("email"));
-            Reader reader=readerService.findReader(email);
+            ReaderDaoImpl readerService = new ReaderDaoImpl();
+            String email = (request.getParameter("email"));
+            Reader reader = readerService.findReader(email);
             request.setAttribute("reader", reader);
-            String json=new ObjectMapper().writeValueAsString(reader);
-            response.setContentType("application/json");  // Set content type of the response so that jQuery knows what it can expect.
-            response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+            String json = new ObjectMapper().writeValueAsString(reader);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-/*        RequestDispatcher requestDispatcher = request.getRequestDispatcher("getBook.jsp");
-        requestDispatcher.forward(request, response);*/
-     }
+
+    }
 }

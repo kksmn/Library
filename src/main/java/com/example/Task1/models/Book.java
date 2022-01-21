@@ -1,6 +1,7 @@
 package com.example.Task1.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Book {
@@ -8,13 +9,31 @@ public class Book {
     String russianName;
     String originalName;
     Integer count;
-    Long bookPictureId;
     Integer year;//type
     Date registrationDate;
     Integer countPages;
     private List<Author> authors;
     private List<Genre> genres;
+    private List<String> images;
     int countAvailableCopies;
+    LocalDate regDate;
+    LocalDate bookYear;
+
+    public LocalDate getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDate regDate) {
+        this.regDate = regDate;
+    }
+
+    public LocalDate getBookYear() {
+        return bookYear;
+    }
+
+    public void setBookYear(LocalDate bookYear) {
+        this.bookYear = bookYear;
+    }
 
     public String getRussianName() {
         return russianName;
@@ -22,6 +41,14 @@ public class Book {
 
     public void setRussianName(String russianName) {
         this.russianName = russianName;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public int getCountAvailableCopies() {
@@ -80,13 +107,7 @@ public class Book {
         this.count = count;
     }
 
-    public Long getBookPictureId() {
-        return bookPictureId;
-    }
 
-    public void setBookPictureId(Long bookPictureId) {
-        this.bookPictureId = bookPictureId;
-    }
 
     public Integer getYear() {
         return year;

@@ -9,14 +9,19 @@
 </head>
 
 <body>
-<form action="main" method="post" id='form' class='formWithValidation'>
-  <%--  <div>
+<form action="main" method="post" id='form' class='formWithValidation' onsubmit="return validate()">
+    <div>
         <label>Book image (required)</label>
+        <br>
         <input type="file" name="image" accept=".jpg,.png,.jpeg" class="req">
-    </div>--%>
+        <span class="error"/>
+    </div>
+    <div id="inputIm0"></div>
+    <input type="button" onclick="addInputImage()" value="one more"></input>
     <div>
         <h3>Rus Name (required)</h3>
         <input type="text" name="russianName" class="req"/>
+        <span class="error"/>
     </div>
     <div>
         <h3>Original name</h3>
@@ -25,50 +30,66 @@
     <div>
         <h3>Price (required)</h3>
         <input type="price" placeholder="20.2" name="price" id="price" class="req"/>
+        <span class="error"/>
 
     </div>
     <div>
         <h3>Price per day (required)</h3>
         <input type="price" placeholder="2" name="priceForDay" id="pricePerDay" class="req"/>
+        <span class="error"/>
     </div>
     <div>
         <h3>Book Copy count (required)</h3>
         <input type="number" placeholder="10" name="count" id="count" class="req"/>
+        <span class="error"/>
     </div>
     <div>
         <h3>Page count</h3>
         <input type="number" placeholder="200" name="countPages" id="countPages"/>
     </div>
     <div>
+        <h3>Genre (required)</h3>
+        <div>
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fantastic"> Fantasy
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Children"> Children's
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fiction"> Fiction
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Detective "> Detective
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Historical "> Historical
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Horror"> Horror
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Science"> Science
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Biography "> Biography
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Science"> Science
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Drama "> Drama
+            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Poetry"> Poetry
+        </div>
+    </div>
+    <input type="text" id="genreError"/>
+    <div>
         <h3>Year of publish</h3>
         <input type="year" name="year" placeholder="2021" name="year" id="year"/>
     </div>
-    <div>
-        <h3>Genre (required)</h3>
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fantastic"> Fantasy
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Children"> Children's
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fiction"> Fiction
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Detective "> Detective
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Historical "> Historical
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Horror"> Horror
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Science"> Science
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Biography "> Biography
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Science"> Science
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Drama "> Drama
-        <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Poetry"> Poetry
-    </div>
+<div id="inputAuthor0">
+    <input type="text" id="isAuthor">
+</div>
     <input type="hidden" name="command" value="addBook"/>
-    <div id="input0"></div>
     <input type="submit" class='validateBtn' value="Добавить"/>
 </form>
-<input type="text" id="input"></input>
+<br>
 <form id="authorForm">
-    <h3>Author (required)</h3>
-    <input type="text" id="authorName" name="author" class="req"/>
-    <h3>Image</h3>
-    <input type="file" name="path" accept=".jpg,.png,.jpeg" />
+    <input type="text" id="input"></input>
+    <div>
+        <h3>Author (required)</h3>
+        <input type="text" id="authorName" name="author" />
+        <span class="error" id="authorError"/>
+    </div>
+    <div>
+        <h3>Image</h3>
+        <input multiple type="file" name="path" id="path" accept=".jpg, .jpeg, .png"/>
+    </div>
+    <input type="button" value="add" onclick="addAuthors()"></input>
+
 </form>
 
-<div class="add" onclick="addAuthors()">Send</div>
+
 </body>
 </html>

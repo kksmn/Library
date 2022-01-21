@@ -8,8 +8,15 @@ function getReader() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let myArr = JSON.parse(xhr.responseText);
-                document.getElementById("readerInput").value = 'Reader: ' + myArr.firstName + ' ' + myArr.lastName;
-                document.getElementById("emailInput").value = myArr.email;
+                if( !myArr.firstName) {
+                    addUser();
+                    document.getElementById("readerInput").value = 'Such user does not exist';
+                }
+                else {
+                    addCheckInput();
+               /*     document.getElementById("readerInput").value = 'Read: ' + myArr.firstName + ' ' + myArr.lastName;
+                    document.getElementById("emailInput").value = myArr.email;*/
+                }
 
             }
         };
@@ -30,5 +37,15 @@ function validateInput(){
         }
     }
     return valid;
+}
+function addCheckInput() {
+    let str =
+        '<input type="button" onclick="checkUser()" value="Check reader debt"/>' ;
+    document.getElementById('userInput').innerHTML = str;
+}
+function addUser() {
+    let str =
+        '<a href="addBook.jsp" >Add reader</a>' ;
+    document.getElementById('userInput').innerHTML = str;
 }
 

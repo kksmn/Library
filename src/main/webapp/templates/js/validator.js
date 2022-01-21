@@ -17,45 +17,37 @@ function validate(){
                 input.nextElementSibling.innerHTML = `${text}`;
                 valid=false;
             }
-        } else if (input.id === 'number') {
-            if (Number.parseInt(input.value) < 0) {
-                text = 'incorrect number format (less then 0)'
+
+        } else if (input.id === 'count') {
+            if (Number.parseInt(input.value) <= 0) {
+                text = 'incorrect number format'
                 input.nextElementSibling.innerHTML = `${text}`;
                 valid=false;
             }
         }else if (input.type === 'checkbox') {
             if (!checkRequire()) {
                 text = 'You should choose at least one genre';
-                let genreInputError = document.getElementById('genreInput');
+                let genreInputError = document.getElementById('genreError');
                 genreInputError.value = `${text}`;
                 valid=false;
             }
         }
+
     }
+    /*if(document.getElementById('isAuthor').value === '')
+    {*/
+        text = 'You should add at least one author';
+        document.getElementById('authorError').innerHTML = `${text}`;
+        valid=false;
+    /*}*/
     return valid;
 }
 
-function validateAuthorInput(){
-    let valid = true;
-    let formReq = document.getElementsByName('authorName');
-    let text = '';
-    for (let i = 0; i < formReq.length; i++) {
-        const input = formReq[i];
-        input.nextElementSibling.innerHTML = '';
-        if (input.value.trim() === '') {
-            text = 'should not be empty';
-            input.nextElementSibling.innerHTML = `${text}`;
-            valid=false;
 
-        }
-    }
-    return valid;
-}
 
 function checkRequire() {
     let el = document.getElementsByClassName("genre");
-
-    let atLeastOneChecked = false;//at least one cb is checked
+    let atLeastOneChecked = false;
     for (let i = 0; i < el.length; i++) {
         if (el[i].checked === true) {
             atLeastOneChecked = true;

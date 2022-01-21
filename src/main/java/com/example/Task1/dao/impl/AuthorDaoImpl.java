@@ -4,10 +4,8 @@ import com.example.Task1.dao.AuthorDao;
 import com.example.Task1.dao.pool.ConnectionPool;
 import com.example.Task1.models.Author;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,14 +65,29 @@ public class AuthorDaoImpl implements AuthorDao {
 
     //что длетаь если изображения не все
     public Long addNewAuthor(String name, String path) {
-        Long id = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        LocalDate date=LocalDate.now();
+        int id=0;
         try {
-            executor.executeStatement(ADD_NEW_AUTHOR,name,path);
-            id = getAuthorByName(name);
-        } catch (Exception exception) {
-            exception.printStackTrace();
+            con = executor.getConnection();
+            ps = con.prepareStatement(ADD_NEW_AUTHOR, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, name);
+            if (!path.equals("")) {
+                ps.setString(2, path);
+            } else {
+                ps.setNull(2, Types.VARCHAR);
+            }
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            rs.next();
+            id = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return id;
+        return Long.valueOf(id);
+
     }
     public List<Author> getAllAuthors() {
         List<Author>authorList = new ArrayList<>();

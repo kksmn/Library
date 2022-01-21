@@ -16,6 +16,7 @@ public class MainControllerHelper {
         commands.put("addBook", new CommandAddBook());
         commands.put("addReader", new CommandAddReader());
         commands.put("findBook", new CommandFindBook());
+        commands.put("returnBook", new CommandReturnBook());
         commands.put("getBook", new CommandGetBook());
         commands.put("getBookTable", new CommandGetBookTable());
         commands.put("getReader", new CommandGetReader());
@@ -29,7 +30,6 @@ public class MainControllerHelper {
 
     public ICommand getCommand(HttpServletRequest request) {
         ICommand command = null;
-        Object req=request.getParameterMap();
         String commandString=request.getParameter("command");
         command = commands.get(commandString);
 

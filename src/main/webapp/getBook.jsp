@@ -2,10 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <link rel="stylesheet" href="templates/css/addBook.css">
-    <script src="templates/js/getBook.js"></script>
-    <script src="templates/js/validator.js"></script>
     <script src="templates/js/getReader.js"></script>
+    <link rel="stylesheet" href="templates/css/addBook.css">
+    <script src="templates/js/getBook.js"></script><%--
+    <script src="templates/js/validator.js"></script>--%>
+
 </head>
 
 <body>
@@ -19,9 +20,9 @@
 
 </form>
 <br>
-<td><a href="addBook.jsp" >Add reader</a></td>
+<div id="userInput"/>
 <br>
-<form action="main" name="bookForm" method="post" onsubmit="return validate()">
+<form action="main" id="bookForm" method="post" >
     <Label>Rus name</Label>
 <hr>
     <input type="text"  name="bookName" class="req"/>
@@ -29,11 +30,11 @@
 
     <div id="input0"></div>
     <div class="add" onclick="addInput()">One more</div>
-    <input type="hidden" name="command" value="getBook"/>
     <input type="hidden" id="emailInput" name="email"></input>
-    <input type="submit" value="Get">
-</form>
 
+</form>
+<input type="text" id="price"/>
+<input type="button" value="Get books" onclick="getBook()">
 <table border="1" cellpadding="5" cellspacing="5">
     <tr>
         <c:forEach begin="1" end="${noOfPages}" var="i">

@@ -785,7 +785,7 @@ false YEKT
 false Z
 false Zulu
 </TimeZones>
-      <StartupTime>1642316389</StartupTime>
+      <StartupTime>1642743486</StartupTime>
     </root>
     <database id="2" parent="1" name="java">
       <ObjectId>16476</ObjectId>
@@ -799,7 +799,7 @@ false Zulu
       <ObjectId>13754</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1212</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1758</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16394|16395|1
 sequence|table|16408|16409|1
@@ -807,13 +807,15 @@ sequence|table|16415|16416|1
 sequence|table|16422|16423|1
 sequence|table|16429|16430|1
 sequence|table|16447|16448|1
+sequence|table|16486|16487|1
 sequence|table|16498|16499|1
 sequence|table|16510|16511|1
 sequence|table|16527|16528|1
 sequence|table|16629|16630|1
-sequence|table|16486|16487|1
 sequence|table|16639|16640|1
 sequence|table|16718|16719|1
+sequence|table|16782|16409|3
+sequence|table|16794|16511|8
 </Relations>
     </database>
     <role id="5" parent="1" name="mak">
@@ -897,7 +899,7 @@ UC/10
 </Acl>
       <StateNumber>527</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1213</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1759</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="23" parent="4" name="adminpack">
@@ -1023,156 +1025,168 @@ UC/10
       <StateNumber>776</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="39" parent="22" name="bookpicture_id_seq">
+    <sequence id="39" parent="22" name="bookpicture_bookId_seq">
+      <ObjectId>16782</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1276</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="40" parent="22" name="bookpicture_id_seq">
       <ObjectId>16408</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>737</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="40" parent="22" name="damagedbook_photo_id_seq">
+    <sequence id="41" parent="22" name="damagedbook_photo_id_seq">
       <ObjectId>16718</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1207</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="41" parent="22" name="genres_id_seq">
+    <sequence id="42" parent="22" name="genres_id_seq">
       <ObjectId>16422</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>739</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="42" parent="22" name="orders_id_seq">
+    <sequence id="43" parent="22" name="orders_copyId_seq">
+      <ObjectId>16794</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1310</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="44" parent="22" name="orders_id_seq">
       <ObjectId>16510</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>777</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="43" parent="22" name="reader_id_seq">
+    <sequence id="45" parent="22" name="reader_id_seq">
       <ObjectId>16429</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>740</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="44" parent="22" name="readerpicture_id_seq">
+    <sequence id="46" parent="22" name="readerpicture_id_seq">
       <ObjectId>16394</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>735</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="45" parent="22" name="return_id_seq">
+    <sequence id="47" parent="22" name="return_id_seq">
       <ObjectId>16527</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>783</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="46" parent="22" name="role_id_seq">
+    <sequence id="48" parent="22" name="role_id_seq">
       <ObjectId>16486</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>772</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="47" parent="22" name="roletable_id_seq">
+    <sequence id="49" parent="22" name="roletable_id_seq">
       <ObjectId>16639</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1084</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="48" parent="22" name="users_id_seq">
+    <sequence id="50" parent="22" name="users_id_seq">
       <ObjectId>16629</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1048</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="49" parent="22" name="author_book">
+    <table id="51" parent="22" name="author_book">
       <ObjectId>16616</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>933</StateNumber>
     </table>
-    <table id="50" parent="22" name="authors">
+    <table id="52" parent="22" name="authors">
       <ObjectId>16416</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>926</StateNumber>
     </table>
-    <table id="51" parent="22" name="book">
+    <table id="53" parent="22" name="book">
       <ObjectId>16448</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>773</StateNumber>
+      <StateNumber>1621</StateNumber>
     </table>
-    <table id="52" parent="22" name="bookcopy">
+    <table id="54" parent="22" name="bookcopy">
       <ObjectId>16499</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>1209</StateNumber>
+      <StateNumber>1743</StateNumber>
     </table>
-    <table id="53" parent="22" name="bookpicture">
+    <table id="55" parent="22" name="bookpicture">
       <ObjectId>16409</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>741</StateNumber>
+      <StateNumber>1276</StateNumber>
     </table>
-    <table id="54" parent="22" name="damagedbook_photo">
+    <table id="56" parent="22" name="damagedbook_photo">
       <ObjectId>16719</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1210</StateNumber>
     </table>
-    <table id="55" parent="22" name="genre_book">
+    <table id="57" parent="22" name="genre_book">
       <ObjectId>16603</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>932</StateNumber>
     </table>
-    <table id="56" parent="22" name="genres">
+    <table id="58" parent="22" name="genres">
       <ObjectId>16423</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>923</StateNumber>
     </table>
-    <table id="57" parent="22" name="orders">
+    <table id="59" parent="22" name="orders">
       <ObjectId>16511</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>1178</StateNumber>
+      <StateNumber>1318</StateNumber>
     </table>
-    <table id="58" parent="22" name="reader">
+    <table id="60" parent="22" name="reader">
       <ObjectId>16430</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1203</StateNumber>
     </table>
-    <table id="59" parent="22" name="readerpicture">
+    <table id="61" parent="22" name="readerpicture">
       <ObjectId>16395</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>740</StateNumber>
     </table>
-    <table id="60" parent="22" name="return">
+    <table id="62" parent="22" name="return">
       <ObjectId>16528</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>783</StateNumber>
     </table>
-    <table id="61" parent="22" name="role">
+    <table id="63" parent="22" name="role">
       <ObjectId>16487</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>774</StateNumber>
     </table>
-    <table id="62" parent="22" name="roletable">
+    <table id="64" parent="22" name="roletable">
       <ObjectId>16640</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1084</StateNumber>
     </table>
-    <table id="63" parent="22" name="users">
+    <table id="65" parent="22" name="users">
       <ObjectId>16630</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1080</StateNumber>
     </table>
-    <column id="64" parent="49" name="book_id">
+    <column id="66" parent="51" name="book_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>933</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="65" parent="49" name="author_id">
+    <column id="67" parent="51" name="author_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>933</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="66" parent="49" name="FK_book_id">
+    <foreign-key id="68" parent="51" name="FK_book_id">
       <ObjectId>16619</ObjectId>
       <StateNumber>933</StateNumber>
       <ColNames>book_id</ColNames>
@@ -1182,7 +1196,7 @@ UC/10
       <RefKeyName>book_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="67" parent="49" name="FK_author_id">
+    <foreign-key id="69" parent="51" name="FK_author_id">
       <ObjectId>16624</ObjectId>
       <StateNumber>933</StateNumber>
       <ColNames>author_id</ColNames>
@@ -1192,7 +1206,7 @@ UC/10
       <RefKeyName>authors_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="68" parent="50" name="id">
+    <column id="70" parent="52" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1200,20 +1214,20 @@ UC/10
       <DefaultExpression>nextval(&apos;authors_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="69" parent="50" name="authorname">
+    <column id="71" parent="52" name="authorname">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>738</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="70" parent="50" name="path">
+    <column id="72" parent="52" name="path">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>905</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="71" parent="50" name="authors_pkey">
+    <index id="73" parent="52" name="authors_pkey">
       <ObjectId>16420</ObjectId>
       <StateNumber>738</StateNumber>
       <ColNames>id</ColNames>
@@ -1223,7 +1237,7 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="72" parent="50" name="unique_authorname">
+    <index id="74" parent="52" name="unique_authorname">
       <ObjectId>16579</ObjectId>
       <StateNumber>889</StateNumber>
       <ColNames>authorname</ColNames>
@@ -1233,20 +1247,20 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="73" parent="50" name="authors_pkey">
+    <key id="75" parent="52" name="authors_pkey">
       <ObjectId>16421</ObjectId>
       <StateNumber>738</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>authors_pkey</UnderlyingIndexName>
     </key>
-    <key id="74" parent="50" name="unique_authorname">
+    <key id="76" parent="52" name="unique_authorname">
       <ObjectId>16580</ObjectId>
       <StateNumber>889</StateNumber>
       <ColNames>authorname</ColNames>
       <UnderlyingIndexName>unique_authorname</UnderlyingIndexName>
     </key>
-    <column id="75" parent="51" name="id">
+    <column id="77" parent="53" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1254,51 +1268,45 @@ UC/10
       <DefaultExpression>nextval(&apos;book_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="76" parent="51" name="russianname">
+    <column id="78" parent="53" name="russianname">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>756</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="77" parent="51" name="originalname">
+    <column id="79" parent="53" name="originalname">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <StateNumber>741</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="78" parent="51" name="count">
+    <column id="80" parent="53" name="count">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>741</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="79" parent="51" name="bookpicture_id">
-      <Position>8</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>741</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="80" parent="51" name="registrationdate">
+    <column id="81" parent="53" name="registrationdate">
       <Position>12</Position>
       <DataType>date|0s</DataType>
       <StateNumber>741</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="81" parent="51" name="countpages">
+    <column id="82" parent="53" name="countpages">
       <Position>13</Position>
       <DataType>smallint|0s</DataType>
       <StateNumber>741</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="82" parent="51" name="year">
-      <Position>14</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>758</StateNumber>
-      <TypeId>23</TypeId>
+    <column id="83" parent="53" name="year">
+      <Position>16</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>1621</StateNumber>
+      <TypeId>1082</TypeId>
     </column>
-    <index id="83" parent="51" name="book_pkey">
+    <index id="84" parent="53" name="book_pkey">
       <ObjectId>16454</ObjectId>
       <StateNumber>741</StateNumber>
       <ColNames>id</ColNames>
@@ -1308,24 +1316,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="84" parent="51" name="book_pkey">
+    <key id="85" parent="53" name="book_pkey">
       <ObjectId>16455</ObjectId>
       <StateNumber>741</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>book_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="85" parent="51" name="book_bookpicture_id_fkey">
-      <ObjectId>16466</ObjectId>
-      <StateNumber>741</StateNumber>
-      <ColNames>bookpicture_id</ColNames>
-      <RefTableId>16409</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>bookpicture</RefTableName>
-      <RefKeyName>bookpicture_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="86" parent="52" name="id">
+    <column id="86" parent="54" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1333,45 +1331,46 @@ UC/10
       <DefaultExpression>nextval(&apos;bookcopy_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="87" parent="52" name="bookid">
+    <column id="87" parent="54" name="bookid">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>776</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="88" parent="52" name="isdamaged">
-      <Position>3</Position>
-      <DataType>boolean|0s</DataType>
-      <StateNumber>776</StateNumber>
-      <TypeId>16</TypeId>
-    </column>
-    <column id="89" parent="52" name="price">
+    <column id="88" parent="54" name="price">
       <Position>5</Position>
       <DataType>numeric|0s</DataType>
       <StateNumber>1097</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <column id="90" parent="52" name="isavailable">
+    <column id="89" parent="54" name="isavailable">
       <Position>9</Position>
       <DataType>boolean|0s</DataType>
-      <StateNumber>1062</StateNumber>
+      <StateNumber>1697</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="91" parent="52" name="priceforday">
+    <column id="90" parent="54" name="priceforday">
       <Position>10</Position>
       <DataType>numeric|0s</DataType>
       <StateNumber>1097</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <column id="92" parent="52" name="damagedBook_id">
+    <column id="91" parent="54" name="damagedBook_id">
       <Position>11</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>1209</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="93" parent="52" name="bookcopy_pkey">
+    <column id="92" parent="54" name="isdamaged">
+      <Position>13</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1743</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="93" parent="54" name="bookcopy_pkey">
       <ObjectId>16503</ObjectId>
-      <StateNumber>1209</StateNumber>
+      <StateNumber>1229</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1379,22 +1378,22 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="94" parent="52" name="fki_damagedBook_photo_FK">
+    <index id="94" parent="54" name="fki_damagedBook_photo_FK">
       <ObjectId>16738</ObjectId>
-      <StateNumber>1211</StateNumber>
+      <StateNumber>1229</StateNumber>
       <ColNames>damagedBook_id</ColNames>
       <AccessMethodId>403</AccessMethodId>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="95" parent="52" name="bookcopy_pkey">
+    <key id="95" parent="54" name="bookcopy_pkey">
       <ObjectId>16504</ObjectId>
       <StateNumber>776</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>bookcopy_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="96" parent="52" name="bookcopy_bookid_fkey">
+    <foreign-key id="96" parent="54" name="bookcopy_bookid_fkey">
       <ObjectId>16505</ObjectId>
       <StateNumber>776</StateNumber>
       <ColNames>bookid</ColNames>
@@ -1404,7 +1403,7 @@ UC/10
       <RefKeyName>book_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="97" parent="52" name="damagedBook_photo_FK">
+    <foreign-key id="97" parent="54" name="damagedBook_photo_FK">
       <ObjectId>16733</ObjectId>
       <StateNumber>1210</StateNumber>
       <ColNames>damagedBook_id</ColNames>
@@ -1414,7 +1413,7 @@ UC/10
       <RefKeyName>damagedbook_photo_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="98" parent="53" name="id">
+    <column id="98" parent="55" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1422,16 +1421,24 @@ UC/10
       <DefaultExpression>nextval(&apos;bookpicture_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="99" parent="53" name="bookpicturepath">
+    <column id="99" parent="55" name="bookpicturepath">
       <Position>2</Position>
       <DataType>varchar(400)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>737</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="100" parent="53" name="bookpicture_pkey">
+    <column id="100" parent="55" name="book_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1757</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;bookpicture_bookId_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="101" parent="55" name="bookpicture_pkey">
       <ObjectId>16413</ObjectId>
-      <StateNumber>737</StateNumber>
+      <StateNumber>1276</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1439,14 +1446,32 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="101" parent="53" name="bookpicture_pkey">
+    <index id="102" parent="55" name="fki_imageFK">
+      <ObjectId>16793</ObjectId>
+      <StateNumber>1278</StateNumber>
+      <ColNames>book_id</ColNames>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="103" parent="55" name="bookpicture_pkey">
       <ObjectId>16414</ObjectId>
       <StateNumber>737</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>bookpicture_pkey</UnderlyingIndexName>
     </key>
-    <column id="102" parent="54" name="id">
+    <foreign-key id="104" parent="55" name="imageFK">
+      <ObjectId>16788</ObjectId>
+      <StateNumber>1277</StateNumber>
+      <ColNames>book_id</ColNames>
+      <RefTableId>16448</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>book</RefTableName>
+      <RefKeyName>book_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="105" parent="56" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1454,14 +1479,14 @@ UC/10
       <DefaultExpression>nextval(&apos;damagedbook_photo_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="103" parent="54" name="path">
+    <column id="106" parent="56" name="path">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1207</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="104" parent="54" name="damagedbook_photo_pkey">
+    <index id="107" parent="56" name="damagedbook_photo_pkey">
       <ObjectId>16723</ObjectId>
       <StateNumber>1207</StateNumber>
       <ColNames>id</ColNames>
@@ -1471,7 +1496,7 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="105" parent="54" name="damagedbook_photo_path_key">
+    <index id="108" parent="56" name="damagedbook_photo_path_key">
       <ObjectId>16725</ObjectId>
       <StateNumber>1207</StateNumber>
       <ColNames>path</ColNames>
@@ -1481,34 +1506,34 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="106" parent="54" name="damagedbook_photo_pkey">
+    <key id="109" parent="56" name="damagedbook_photo_pkey">
       <ObjectId>16724</ObjectId>
       <StateNumber>1207</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>damagedbook_photo_pkey</UnderlyingIndexName>
     </key>
-    <key id="107" parent="54" name="damagedbook_photo_path_key">
+    <key id="110" parent="56" name="damagedbook_photo_path_key">
       <ObjectId>16726</ObjectId>
       <StateNumber>1207</StateNumber>
       <ColNames>path</ColNames>
       <UnderlyingIndexName>damagedbook_photo_path_key</UnderlyingIndexName>
     </key>
-    <column id="108" parent="55" name="book_id">
+    <column id="111" parent="57" name="book_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>932</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="109" parent="55" name="genre_id">
+    <column id="112" parent="57" name="genre_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>932</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="110" parent="55" name="FK_book_id">
+    <foreign-key id="113" parent="57" name="FK_book_id">
       <ObjectId>16606</ObjectId>
       <StateNumber>932</StateNumber>
       <ColNames>book_id</ColNames>
@@ -1518,7 +1543,7 @@ UC/10
       <RefKeyName>book_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="111" parent="55" name="FK_genre_id">
+    <foreign-key id="114" parent="57" name="FK_genre_id">
       <ObjectId>16611</ObjectId>
       <StateNumber>932</StateNumber>
       <ColNames>genre_id</ColNames>
@@ -1528,7 +1553,7 @@ UC/10
       <RefKeyName>genres_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="112" parent="56" name="id">
+    <column id="115" parent="58" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1536,13 +1561,13 @@ UC/10
       <DefaultExpression>nextval(&apos;genres_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="113" parent="56" name="genrename">
+    <column id="116" parent="58" name="genrename">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>797</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="114" parent="56" name="genres_pkey">
+    <index id="117" parent="58" name="genres_pkey">
       <ObjectId>16427</ObjectId>
       <StateNumber>739</StateNumber>
       <ColNames>id</ColNames>
@@ -1552,14 +1577,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="115" parent="56" name="genres_pkey">
+    <key id="118" parent="58" name="genres_pkey">
       <ObjectId>16428</ObjectId>
       <StateNumber>739</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>genres_pkey</UnderlyingIndexName>
     </key>
-    <column id="116" parent="57" name="id">
+    <column id="119" parent="59" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1567,39 +1592,41 @@ UC/10
       <DefaultExpression>nextval(&apos;orders_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="117" parent="57" name="readerid">
+    <column id="120" parent="59" name="readerid">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>777</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="118" parent="57" name="copyid">
-      <Position>4</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>777</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="119" parent="57" name="fine">
+    <column id="121" parent="59" name="fine">
       <Position>5</Position>
-      <DataType>money|0s</DataType>
-      <StateNumber>777</StateNumber>
-      <TypeId>790</TypeId>
+      <DataType>numeric|0s</DataType>
+      <StateNumber>1318</StateNumber>
+      <TypeId>1700</TypeId>
     </column>
-    <column id="120" parent="57" name="date">
+    <column id="122" parent="59" name="date">
       <Position>6</Position>
       <DataType>date|0s</DataType>
       <StateNumber>777</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="121" parent="57" name="price">
+    <column id="123" parent="59" name="price">
       <Position>7</Position>
       <DataType>numeric|0s</DataType>
       <StateNumber>1178</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <index id="122" parent="57" name="orders_pkey">
+    <column id="124" parent="59" name="copyId">
+      <Position>8</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1310</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;orders_copyId_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="125" parent="59" name="orders_pkey">
       <ObjectId>16515</ObjectId>
-      <StateNumber>777</StateNumber>
+      <StateNumber>1318</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1607,14 +1634,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="123" parent="57" name="orders_pkey">
+    <key id="126" parent="59" name="orders_pkey">
       <ObjectId>16516</ObjectId>
       <StateNumber>777</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>orders_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="124" parent="57" name="orders_readerid_fkey">
+    <foreign-key id="127" parent="59" name="orders_readerid_fkey">
       <ObjectId>16517</ObjectId>
       <StateNumber>777</StateNumber>
       <ColNames>readerid</ColNames>
@@ -1624,17 +1651,7 @@ UC/10
       <RefKeyName>reader_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="125" parent="57" name="orders_copyid_fkey">
-      <ObjectId>16522</ObjectId>
-      <StateNumber>777</StateNumber>
-      <ColNames>copyid</ColNames>
-      <RefTableId>16499</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>bookcopy</RefTableName>
-      <RefKeyName>bookcopy_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="126" parent="58" name="id">
+    <column id="128" parent="60" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1642,60 +1659,60 @@ UC/10
       <DefaultExpression>nextval(&apos;reader_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="127" parent="58" name="firstname">
+    <column id="129" parent="60" name="firstname">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="128" parent="58" name="lastname">
+    <column id="130" parent="60" name="lastname">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="129" parent="58" name="passportnumber">
+    <column id="131" parent="60" name="passportnumber">
       <Position>5</Position>
       <DataType>varchar(60)|0s</DataType>
       <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="130" parent="58" name="address">
+    <column id="132" parent="60" name="address">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="131" parent="58" name="email">
+    <column id="133" parent="60" name="email">
       <Position>7</Position>
       <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="132" parent="58" name="date">
+    <column id="134" parent="60" name="date">
       <Position>8</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>740</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="133" parent="58" name="patronymic">
+    <column id="135" parent="60" name="patronymic">
       <Position>10</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>747</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="134" parent="58" name="photopath">
+    <column id="136" parent="60" name="photopath">
       <Position>12</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>1203</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="135" parent="58" name="reader_pkey">
+    <index id="137" parent="60" name="reader_pkey">
       <ObjectId>16436</ObjectId>
       <StateNumber>740</StateNumber>
       <ColNames>id</ColNames>
@@ -1705,7 +1722,7 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="136" parent="58" name="reader_passportnumber_key">
+    <index id="138" parent="60" name="reader_passportnumber_key">
       <ObjectId>16438</ObjectId>
       <StateNumber>740</StateNumber>
       <ColNames>passportnumber</ColNames>
@@ -1715,7 +1732,7 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <index id="137" parent="58" name="reader_email_key">
+    <index id="139" parent="60" name="reader_email_key">
       <ObjectId>16440</ObjectId>
       <StateNumber>740</StateNumber>
       <ColNames>email</ColNames>
@@ -1725,26 +1742,26 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="138" parent="58" name="reader_pkey">
+    <key id="140" parent="60" name="reader_pkey">
       <ObjectId>16437</ObjectId>
       <StateNumber>740</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>reader_pkey</UnderlyingIndexName>
     </key>
-    <key id="139" parent="58" name="reader_passportnumber_key">
+    <key id="141" parent="60" name="reader_passportnumber_key">
       <ObjectId>16439</ObjectId>
       <StateNumber>740</StateNumber>
       <ColNames>passportnumber</ColNames>
       <UnderlyingIndexName>reader_passportnumber_key</UnderlyingIndexName>
     </key>
-    <key id="140" parent="58" name="reader_email_key">
+    <key id="142" parent="60" name="reader_email_key">
       <ObjectId>16441</ObjectId>
       <StateNumber>740</StateNumber>
       <ColNames>email</ColNames>
       <UnderlyingIndexName>reader_email_key</UnderlyingIndexName>
     </key>
-    <column id="141" parent="59" name="id">
+    <column id="143" parent="61" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1752,14 +1769,14 @@ UC/10
       <DefaultExpression>nextval(&apos;readerpicture_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="142" parent="59" name="readerpicturepath">
+    <column id="144" parent="61" name="readerpicturepath">
       <Position>2</Position>
       <DataType>varchar(400)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>735</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="143" parent="59" name="readerpicture_pkey">
+    <index id="145" parent="61" name="readerpicture_pkey">
       <ObjectId>16399</ObjectId>
       <StateNumber>735</StateNumber>
       <ColNames>id</ColNames>
@@ -1769,14 +1786,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="144" parent="59" name="readerpicture_pkey">
+    <key id="146" parent="61" name="readerpicture_pkey">
       <ObjectId>16400</ObjectId>
       <StateNumber>735</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>readerpicture_pkey</UnderlyingIndexName>
     </key>
-    <column id="145" parent="60" name="id">
+    <column id="147" parent="62" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1784,37 +1801,37 @@ UC/10
       <DefaultExpression>nextval(&apos;return_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="146" parent="60" name="readerid">
+    <column id="148" parent="62" name="readerid">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>783</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="147" parent="60" name="price">
+    <column id="149" parent="62" name="price">
       <Position>3</Position>
       <DataType>money|0s</DataType>
       <StateNumber>783</StateNumber>
       <TypeId>790</TypeId>
     </column>
-    <column id="148" parent="60" name="copyid">
+    <column id="150" parent="62" name="copyid">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>783</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="149" parent="60" name="path">
+    <column id="151" parent="62" name="path">
       <Position>5</Position>
       <DataType>char(200)|0s</DataType>
       <StateNumber>783</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="150" parent="60" name="rating">
+    <column id="152" parent="62" name="rating">
       <Position>6</Position>
       <DataType>numeric(2)|0s</DataType>
       <StateNumber>783</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <index id="151" parent="60" name="return_pkey">
+    <index id="153" parent="62" name="return_pkey">
       <ObjectId>16532</ObjectId>
       <StateNumber>783</StateNumber>
       <ColNames>id</ColNames>
@@ -1824,14 +1841,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="152" parent="60" name="return_pkey">
+    <key id="154" parent="62" name="return_pkey">
       <ObjectId>16533</ObjectId>
       <StateNumber>783</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>return_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="153" parent="60" name="return_readerid_fkey">
+    <foreign-key id="155" parent="62" name="return_readerid_fkey">
       <ObjectId>16534</ObjectId>
       <StateNumber>783</StateNumber>
       <ColNames>readerid</ColNames>
@@ -1841,7 +1858,7 @@ UC/10
       <RefKeyName>reader_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="154" parent="60" name="return_copyid_fkey">
+    <foreign-key id="156" parent="62" name="return_copyid_fkey">
       <ObjectId>16539</ObjectId>
       <StateNumber>783</StateNumber>
       <ColNames>copyid</ColNames>
@@ -1851,7 +1868,7 @@ UC/10
       <RefKeyName>bookcopy_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="155" parent="61" name="id">
+    <column id="157" parent="63" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1859,14 +1876,14 @@ UC/10
       <DefaultExpression>nextval(&apos;role_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="156" parent="61" name="rolename">
+    <column id="158" parent="63" name="rolename">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>772</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="157" parent="61" name="role_pkey">
+    <index id="159" parent="63" name="role_pkey">
       <ObjectId>16491</ObjectId>
       <StateNumber>772</StateNumber>
       <ColNames>id</ColNames>
@@ -1876,14 +1893,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="158" parent="61" name="role_pkey">
+    <key id="160" parent="63" name="role_pkey">
       <ObjectId>16492</ObjectId>
       <StateNumber>772</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>role_pkey</UnderlyingIndexName>
     </key>
-    <column id="159" parent="62" name="id">
+    <column id="161" parent="64" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1891,14 +1908,14 @@ UC/10
       <DefaultExpression>nextval(&apos;roletable_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="160" parent="62" name="role">
+    <column id="162" parent="64" name="role">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1084</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="161" parent="62" name="roletable_pkey">
+    <index id="163" parent="64" name="roletable_pkey">
       <ObjectId>16644</ObjectId>
       <StateNumber>1084</StateNumber>
       <ColNames>id</ColNames>
@@ -1908,7 +1925,7 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="162" parent="62" name="roletable_role_key">
+    <index id="164" parent="64" name="roletable_role_key">
       <ObjectId>16646</ObjectId>
       <StateNumber>1084</StateNumber>
       <ColNames>role</ColNames>
@@ -1918,20 +1935,20 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="163" parent="62" name="roletable_pkey">
+    <key id="165" parent="64" name="roletable_pkey">
       <ObjectId>16645</ObjectId>
       <StateNumber>1084</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>roletable_pkey</UnderlyingIndexName>
     </key>
-    <key id="164" parent="62" name="roletable_role_key">
+    <key id="166" parent="64" name="roletable_role_key">
       <ObjectId>16647</ObjectId>
       <StateNumber>1084</StateNumber>
       <ColNames>role</ColNames>
       <UnderlyingIndexName>roletable_role_key</UnderlyingIndexName>
     </key>
-    <column id="165" parent="63" name="id">
+    <column id="167" parent="65" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1939,25 +1956,25 @@ UC/10
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="166" parent="63" name="firstname">
+    <column id="168" parent="65" name="firstname">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <StateNumber>1048</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="167" parent="63" name="email">
+    <column id="169" parent="65" name="email">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <StateNumber>1048</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="168" parent="63" name="password">
+    <column id="170" parent="65" name="password">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>1080</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="169" parent="63" name="users_pkey">
+    <index id="171" parent="65" name="users_pkey">
       <ObjectId>16634</ObjectId>
       <StateNumber>1048</StateNumber>
       <ColNames>id</ColNames>
@@ -1967,7 +1984,7 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="170" parent="63" name="users_pkey">
+    <key id="172" parent="65" name="users_pkey">
       <ObjectId>16635</ObjectId>
       <StateNumber>1048</StateNumber>
       <ColNames>id</ColNames>

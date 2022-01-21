@@ -8,7 +8,6 @@
     <script src="templates/js/findBook.js"></script>
 </head>
 <body>
-<input type="text"  id="type"/>
 <form action="main" method="post" id="searchForm">
     <Label>Name</Label>
     <input type="search" name="name"/>

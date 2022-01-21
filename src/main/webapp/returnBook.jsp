@@ -4,30 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="templates/css/addBook.css">
-    <script src="templates/js/returnBook.js"></script>
-    <script src="templates/js/getReader.js"></script>
-
-    <script src="templates/js/validator.js"></script>
+ <%--   <script src="templates/js/getReader.js"></script>--%>
+    <script src="templates/js/returnBook.js"></script><%--
+    <script src="templates/js/validator.js"></script>--%>
 </head>
 <body>
-<form id="readerForm">
+<form id="emailForm">
     <label>Email</label>
     <input type="text"   id="email" name="email" class="readerInput"/>
     <label class="errorInput" ></label>
-    <input type="button" onclick="getReader()" value="Get reader"/>
-    <br>
     <input type="text" id="readerInput" name="email"></input>
-
+    <input type="button" onclick="findReader()" value="Find reader"/>
 </form>
-<form id="authorForm">
-    <h3>Author (required)</h3>
-    <input type="text" name="authorName" id="authorName" class="req"/>
-    <h3>Image</h3>
-    <input type="file" name="path">
-    <div id="input0"></div>
+<form id="readerForm">
+       <h3>Rus name (required)</h3>
+       <input type="text" name="rusName" class="req"/>
+
+
+       <h3>Rating</h3>
+       <input type="number" name="rating">
+       <input type="hidden" id="emailInput" name="email"></input>
+    <input type="button" onclick="getReader()" value="Get order"/>
+    <br>
+    <h3>Defects</h3>
+    <input multiple type="file" name="path" accept=".jpg, .jpeg, .png">
+
+    <input type="button" onclick="addInput()" value="one more"/>
+    <div id="input0"/>
 </form>
 
-<div class="add" onclick="addAuthors()">Send</div>
-<div class="add" onclick="addInput()">add input</div>
+
+<div id="input"/>
+<form id="orderForm">
+    <div id="order0"/>
+</form>
+
 </body>
 </html>
