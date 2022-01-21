@@ -6,13 +6,14 @@ import com.example.Task1.dao.pool.ConnectionPool;
 import com.example.Task1.models.Order;
 import com.example.Task1.models.Reader;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
@@ -22,13 +23,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     public void addNewOrder(Order order) {
-        String sql = "INSERT INTO Orders(readerId, price,copyId,date) VALUES (?, ?, ?,?)";
+        String sql = "INSERT INTO Orders(readerId, price,copy_id,date) VALUES (?, ?, ?,?)";
         try {
-            DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-            String date=df.format(order.getDate().getTime());
-            Date docDate= df.parse(date);
-            Date datoe=new Date();
-            executor.executeStatement(sql,order.getReaderId(),order.getPrice(),order.getCopy_id(),datoe);
+             LocalDate date=new Date(order.getDate().getTime()).toLocalDate();
+            executor.executeStatement(sql,order.getReaderId(),order.getPrice(),order.getCopy_id(),java.sql.Date.valueOf(date));
             } catch (Exception e) {
             e.printStackTrace();
         }

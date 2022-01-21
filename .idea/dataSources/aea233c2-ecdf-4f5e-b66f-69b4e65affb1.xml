@@ -799,7 +799,7 @@ false Zulu
       <ObjectId>13754</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1758</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2076</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16394|16395|1
 sequence|table|16408|16409|1
@@ -899,7 +899,7 @@ UC/10
 </Acl>
       <StateNumber>527</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1759</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2077</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="23" parent="4" name="adminpack">
@@ -1616,11 +1616,11 @@ UC/10
       <StateNumber>1178</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <column id="124" parent="59" name="copyId">
+    <column id="124" parent="59" name="copy_id">
       <Position>8</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1310</StateNumber>
+      <StateNumber>1968</StateNumber>
       <DefaultExpression>nextval(&apos;&quot;orders_copyId_seq&quot;&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1662,15 +1662,13 @@ UC/10
     <column id="129" parent="60" name="firstname">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>740</StateNumber>
+      <StateNumber>2075</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="130" parent="60" name="lastname">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>740</StateNumber>
+      <StateNumber>2075</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="131" parent="60" name="passportnumber">
@@ -1682,22 +1680,19 @@ UC/10
     <column id="132" parent="60" name="address">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>740</StateNumber>
+      <StateNumber>2074</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="133" parent="60" name="email">
       <Position>7</Position>
       <DataType>varchar(60)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>740</StateNumber>
+      <StateNumber>2075</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="134" parent="60" name="date">
       <Position>8</Position>
       <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>740</StateNumber>
+      <StateNumber>2075</StateNumber>
       <TypeId>1082</TypeId>
     </column>
     <column id="135" parent="60" name="patronymic">

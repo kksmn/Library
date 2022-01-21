@@ -76,9 +76,10 @@ let flag=false;
 function addOrder() {
     let str =
         '<div>' +
-        '<h3>Return date</h3>' +
+        '<h3>Reader order</h3>' +
+        '<h4>Return date</h4>' +
         '<input type="text" id="date"  readOnly/>' +
-        '<h3>Price</h3>' +
+        '<h4>Total price</h4>' +
         '<input type="text" id="price"  readOnly/>' +
         '<a href="main?command=getBookTable">Close order</a>'+
         '</div>';

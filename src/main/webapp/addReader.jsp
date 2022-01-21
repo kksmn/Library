@@ -8,11 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
-    <script src="templates/js/validator.js"></script>
+<script src="templates/js/addBookValidator.js"></script>
 </head>
 <body>
-<form action="main" method="post" onsubmit="return validate()">
+<form action="main" method="post" onsubmit="return validateAllInputs()">
     <label>Firstname (required)</label>
     <input type="text"  class="req" name="firstName"/>
     <label class="errorInput" ></label>

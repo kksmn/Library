@@ -46,7 +46,7 @@ public class CommandAddBook implements ICommand {
             book.setCountPages(Integer.valueOf(request.getParameter("countPages")));
         }
         if (!request.getParameter("year").equals("")) {
-            book.setRegDate(LocalDate.parse(request.getParameter("year") + "-12-12"));
+            book.setBookYear(LocalDate.parse(request.getParameter("year") + "-12-12"));
         }
         String[] images = request.getParameterValues("image");
         String[] genres = request.getParameterValues("genre");
@@ -76,19 +76,5 @@ public class CommandAddBook implements ICommand {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("mainPage.jsp");
         requestDispatcher.forward(request, response);
     }
-    private List<String> getImage(HttpServletRequest request, String partName, String saveDirectory) throws IOException, ServletException {
-        List<String> picture = new ArrayList<>();
-        for (Part part : request.getParts()) {
-            if (part.getName().equals(partName)) {
-                if (!part.getSubmittedFileName().isEmpty()) {
-                    String name = UUID.randomUUID().toString() + "." + part.getSubmittedFileName().trim().replace(" ", "");
-                    picture.add(name);
-                    part.write(saveDirectory + name);
-                } else {
-                    picture.add(part.getSubmittedFileName());
-                }
-            }
-        }
-        return picture;
-    }
+
 }

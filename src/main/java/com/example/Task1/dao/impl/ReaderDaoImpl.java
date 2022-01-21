@@ -4,6 +4,7 @@ import com.example.Task1.dao.ReaderDao;
 import com.example.Task1.models.Reader;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +13,33 @@ public class ReaderDaoImpl implements ReaderDao {
     private static final String FIND_READER = "SELECT * FROM READER WHERE email=?";
 
     private static final String COUNT_READER_ROWS = "SELECT COUNT(*) AS rowcount FROM READER";
-
+    private static final String ADD_NEW_READER="INSERT INTO READER (firstname, lastname,passportnumber,address,email,date,patronymic,photopath ) VALUES (?, ?, ?,?,?,?,?,?)";
     public void addReader(Reader reader) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO READER (firstname, lastname,passportnumber,address,email,date,patronymic ) VALUES (?, ?, ?,?,?,?,?)";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id = 0;
         try {
-            executor.executeStatement(sql,reader.getFirstName(),reader.getLastName(),reader.getPassportNumber(),reader.getAddress(),reader.getEmail(),reader.getDate(),reader.getPatronymic());
+            LocalDate date=new Date(reader.getDate().getTime()).toLocalDate();
+            con = executor.getConnection();
+            ps = con.prepareStatement(ADD_NEW_READER, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, reader.getFirstName());
+            ps.setString(2, reader.getLastName());
+            ps.setString(3, reader.getPassportNumber());
+            ps.setString(4, reader.getAddress());
+            ps.setString(5, reader.getEmail());
+            ps.setDate(6, java.sql.Date.valueOf(date));
+            ps.setString(7, reader.getPatronymic());
+            ps.setString(8, reader.getPhotoPath());
+
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            rs.next();
+            id = rs.getInt(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
 
     }
@@ -45,6 +65,31 @@ public class ReaderDaoImpl implements ReaderDao {
         }
 
         return reader;
+    }
+    public List<Reader> getReadersByEmail(String email) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM Reader where email=? ";
+        List<Reader> list=new ArrayList<>();
+        try{
+            ResultSet resultSet=executor.getResultSet(sql,email);
+            while (resultSet.next()){
+                Reader reader=new Reader();
+                reader.setId(resultSet.getLong(1));
+                reader.setFirstName(resultSet.getString(2));
+                reader.setLastName(resultSet.getString(3));
+                reader.setPassportNumber(resultSet.getString(4));
+                reader.setAddress(resultSet.getString(5));
+                reader.setEmail(resultSet.getString(6));
+                reader.setDate(resultSet.getDate(7));
+                reader.setPatronymic(resultSet.getString(8));
+                reader.setPhotoPath(resultSet.getString(9));
+
+                list.add(reader);
+            }
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
     public List<Reader> getReaders(int start, int total) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM Reader limit ? OFFSET ?";

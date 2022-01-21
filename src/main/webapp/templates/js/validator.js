@@ -36,9 +36,9 @@ function validate(){
     }
     /*if(document.getElementById('isAuthor').value === '')
     {*/
-        text = 'You should add at least one author';
+      /*  text = 'You should add at least one author';
         document.getElementById('authorError').innerHTML = `${text}`;
-        valid=false;
+        valid=false;*/
     /*}*/
     return valid;
 }

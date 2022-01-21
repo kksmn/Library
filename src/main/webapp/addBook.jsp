@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="templates/css/addBook.css">
     <script src="templates/js/addBooks.js"></script>
-    <script src="templates/js/validator.js"></script>
+    <script src="templates/js/addBookValidator.js"></script>
+   <%-- <script src="templates/js/addBooks.js"></script>--%>
 </head>
 
 <body>
-<form action="main" method="post" id='form' class='formWithValidation' onsubmit="return validate()">
+<form action="main" method="post" id='form' class='formWithValidation' onsubmit="return validateAllInputs()">
     <div>
         <label>Book image (required)</label>
         <br>
@@ -42,15 +43,15 @@
         <h3>Book Copy count (required)</h3>
         <input type="number" placeholder="10" name="count" id="count" class="req"/>
         <span class="error"/>
+
     </div>
     <div>
         <h3>Page count</h3>
         <input type="number" placeholder="200" name="countPages" id="countPages"/>
     </div>
-    <div>
         <h3>Genre (required)</h3>
         <div>
-            <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Fantastic"> Fantasy
+            <input type="checkbox" class='genre'  onclick='checkRequire()' name="genre" value="Fantastic"> Fantasy
             <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Children"> Children's
             <br>
@@ -72,8 +73,9 @@
             <br>
             <input type="checkbox" class='genre' onclick='checkRequire()' name="genre" value="Poetry"> Poetry
         </div>
+        <span id="genreError"></span>
     </div>
-    <span class="error" id="genreError"/>
+
     <div>
         <h3>Year of publish</h3>
         <input type="year" name="year" placeholder="2021" name="year" id="year"/>
@@ -96,7 +98,7 @@
         <h3>Image</h3>
         <input multiple type="file" name="path" id="path" accept=".jpg, .jpeg, .png"/>
     </div>
-    <input type="button" value="add" onclick="addAuthors()"></input>
+    <input type="button" value="add" onclick="addAuthors()" ></input>
 
 </form>
 

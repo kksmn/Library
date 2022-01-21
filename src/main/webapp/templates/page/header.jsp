@@ -5,4 +5,5 @@
     <a  href="getBook.jsp">Взять книгу</a>
     <a  href="returnBook.jsp">Вернуть книгу</a>
     <a   href="main?command=getSearchPage">Поиск</a>
+    <a   href="main?command=getReaderTable">пользователи</a>
 </header>

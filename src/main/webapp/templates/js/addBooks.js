@@ -47,7 +47,7 @@ let y = 0;
 function addInputImage() {
     let str =
         '<input type="file" name="image"/>' +
-        '<div id="inputIm' + (x + 1) + '"/>';
-    document.getElementById('inputIm' + x).innerHTML = str;
-    x++;
+        '<div id="inputIm' + (y + 1) + '"/>';
+    document.getElementById('inputIm' + y).innerHTML = str;
+    y++;
 }

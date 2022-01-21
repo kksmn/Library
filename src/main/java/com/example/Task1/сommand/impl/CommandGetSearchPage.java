@@ -21,20 +21,36 @@ public class CommandGetSearchPage implements ICommand {
             BookDaoImpl bookService=new BookDaoImpl();
             BookCopyDaoImpl copyService=new BookCopyDaoImpl();
             int page = 1;
-            int recordsPerPage = 1;
+            int recordsPerPage = 20;
             if(request.getParameter("page") != null)
                 page = Integer.parseInt(request.getParameter("page"));
-            Map<Long, Book> list = bookService.getBooks(recordsPerPage,
-                    (page-1)*recordsPerPage);
-            for(Map.Entry<Long, Book> item : list.entrySet()){
-                item.getValue().setCountAvailableCopies(copyService.countAvailableCopy(item.getValue().getId()));
+            if (request.getParameter("name")!= null && request.getParameter("name")!= "")
+            {
+                String name=request.getParameter("name");
+                Map<Long, Book> list = bookService.getBookMap(name,recordsPerPage,
+                        (page-1)*recordsPerPage);
+                for (Map.Entry<Long, Book> item : list.entrySet()) {
+                    item.getValue().setCountAvailableCopies(copyService.countAvailableCopy(item.getValue().getId()));
+                }
+                int noOfRecords = bookService.getNoOfRecords();
+                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                request.setAttribute("noOfPages", noOfPages);
+                request.setAttribute("name", name);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("list", list);
             }
-            int noOfRecords = bookService.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", page);
-
-            request.setAttribute("list", list);
+            else {
+                Map<Long, Book> list = bookService.getBooks(recordsPerPage,
+                        (page - 1) * recordsPerPage);
+                for (Map.Entry<Long, Book> item : list.entrySet()) {
+                    item.getValue().setCountAvailableCopies(copyService.countAvailableCopy(item.getValue().getId()));
+                }
+                int noOfRecords = bookService.getNoOfRecords();
+                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                request.setAttribute("noOfPages", noOfPages);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("list", list);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {

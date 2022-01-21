@@ -15,7 +15,6 @@ public class MainControllerHelper {
     private MainControllerHelper() {
         commands.put("addBook", new CommandAddBook());
         commands.put("addReader", new CommandAddReader());
-        commands.put("findBook", new CommandFindBook());
         commands.put("returnBook", new CommandReturnBook());
         commands.put("getBook", new CommandGetBook());
         commands.put("getBookTable", new CommandGetBookTable());
@@ -25,7 +24,7 @@ public class MainControllerHelper {
         commands.put("addAuthor", new CommandAddAuthor());
         commands.put("checkUser", new CommandCheckUser());
         commands.put("getSearchPage", new CommandGetSearchPage());
-        commands.put("getSearch", new CommandGetSearch());
+        commands.put("checkUser", new CommandCheckUser());
     }
 
     public ICommand getCommand(HttpServletRequest request) {

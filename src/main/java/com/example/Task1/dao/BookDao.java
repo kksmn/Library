@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface BookDao {
-    Map<Long, Book> getBookMap(String bookName);
+    Map<Long, Book> getBookMap(String bookName,int start,int total);
     String getBookById(Long id);
     List<Long> getBookByName(String bookName);
     Long getCopyId(String name);

@@ -4,6 +4,7 @@ import com.example.Task1.dao.impl.ReaderDaoImpl;
 import com.example.Task1.models.Reader;
 import com.example.Task1.сommand.ICommand;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,7 @@ public class CommandAddReader implements ICommand {
             if (!request.getParameter("image").equals("")) {
                 reader.setPhotoPath(request.getParameter("image"));
             }
+
             readerService.addReader(reader);
             log.info("New book was added");
         } catch (SQLException throwables) {
@@ -42,7 +44,8 @@ public class CommandAddReader implements ICommand {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-      /*  return "mainPage.jsp";*/
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("mainPage.jsp");
+        requestDispatcher.forward(request, response);
     }
 }
 

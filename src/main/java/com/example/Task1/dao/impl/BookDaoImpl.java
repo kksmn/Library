@@ -4,7 +4,9 @@ import com.example.Task1.dao.BookDao;
 import com.example.Task1.dao.pool.ConnectionPool;
 import com.example.Task1.models.*;
 
+import java.math.BigDecimal;
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -18,11 +20,11 @@ public class BookDaoImpl implements BookDao {
     private QueryExecutor executor = QueryExecutor.getInstance();
 
     private static final String ADD_NEW_BOOK = "INSERT INTO BOOK (russianname, originalname,count,registrationdate,countpages,year) VALUES (?, ?,?,?,?,?)";
-    private static final String SELECT_FROM_BOOK = "SELECT * FROM BOOK WHERE russianname=?";
+    private static final String SELECT_FROM_BOOK = "SELECT * FROM BOOK WHERE russianname=? limit ? OFFSET ?";
     private static final String COUNT_BOOK_ROWS = "SELECT COUNT(*) AS rowcount FROM BOOK";
     private static final String GET_BOOK_BY_ID = "SELECT russianname FROM BOOK WHERE id=?";
     private static final String UPDATE_USER = "UPDATE users SET password = ?, email = ? WHERE id = ?";
-    private static final String GET_BOOK_BY_NAME = "SELECT id FROM BOOK WHERE russianname=? limit 1";
+    private static final String GET_BOOK_BY_NAME = "SELECT id FROM BOOK WHERE russianname=?";
     private static final String GET_BOOKS = "SELECT * FROM Book limit ? OFFSET ?";
     private static final String GET_COPY_BY_BOOK = "SELECT bookid FROM BookCopy WHERE book_id=?";
     private static final String ADD_NEW_PHOTO = "INSERT INTO BOOKPICTURE(book_id,bookpicturepath) values (?,?)";
@@ -50,10 +52,10 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
-    public Map<Long, Book> getBookMap(String bookName) {
+    public Map<Long, Book> getBookMap(String bookName,int start, int total) {
         Map<Long, Book> bookMap = new HashMap<>();
         try {
-            ResultSet resultSet = executor.getResultSet(SELECT_FROM_BOOK, bookName);
+            ResultSet resultSet = executor.getResultSet(SELECT_FROM_BOOK, bookName,start,total);
             while (resultSet.next()) {
                 Book book = new Book();
                 List<Author> authors = new ArrayList<>();
@@ -194,20 +196,6 @@ public class BookDaoImpl implements BookDao {
         return cal;
     }
 
-    public long getDifferenceBetweenDate(Calendar lastDate) {
-        Calendar currentDate = getCurrentDate();
-        lastDate.set(Calendar.MILLISECOND, 0);
-        lastDate.set(Calendar.MINUTE, 0);
-        lastDate.set(Calendar.HOUR, 0);
-        currentDate.set(Calendar.MILLISECOND, 0);
-        currentDate.set(Calendar.MINUTE, 0);
-        currentDate.set(Calendar.HOUR, 0);
-
-        long remainingDays = Math.round((float) (lastDate.getTimeInMillis() - currentDate.getTimeInMillis()) / (24 * 60 * 60 * 1000));
-
-        return remainingDays;
-    }
-
     public Double getBookPrice(BookCopy copy) {
         Calendar calendar = getCurrentDate();
         int countOfDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -302,46 +290,59 @@ public class BookDaoImpl implements BookDao {
 
     }
 
-    public Order getBook(String bookName, Reader reader) throws SQLException, ClassNotFoundException {
+    public ConfirmedOrder getBook(String[] bookNames, Reader reader) throws SQLException, ClassNotFoundException {
         int countOrders = 0;
-        Order returnOrder = new Order();
+        ConfirmedOrder returnOrder=new ConfirmedOrder();
+        List<String>books=new ArrayList<>();
+        double totalPrice = 0;
+        BookCopy copy;
         List<BookCopy> copyList = new ArrayList<>();
-        if (!orderService.getReaderDebt(reader)) {
-            List<Long> list = new ArrayList<>();
-            list = getBookByName(bookName);
-
-            for (Long id : list) {
-                copyList.add(bookCopyService.getCopyOfAvailableBook(id));
-            }
-
-            for (BookCopy copy : copyList) {
+        for (int i = 0; i < bookNames.length; i++) {
+            List<Long> list = getBookByName(bookNames[i]);
+            for (Long id:list) {
+                copy = bookCopyService.getCopyOfAvailableBook(id);
                 if (copy.getId() != null) {
-                    bookCopyService.makeBookNotAvailable(copy.getId());
+                    copyList.add(copy);
+                    books.add(bookNames[i]);
+                    break;
                 }
-            }
-            int ordersSize = copyList.size();
 
-            if (ordersSize != 0) {
-                for (BookCopy copy : copyList) {
-                    Order order = new Order();
-                    order.setReaderId(reader.getId());
-                    order.setCopy_id(copy.getId());
-                    order.setDate(getDateForReading());
-
-                    if (countOrders > 4) {
-                        order.setPrice(getBookPrice(copy) * 0.85);
-
-                    } else if (countOrders > 2) {
-                        order.setPrice(getBookPrice(copy) * 0.9);
-                    } else order.setPrice(getBookPrice(copy));
-                    //date doesnt work
-                    orderService.addNewOrder(order);
-                    returnOrder = order;
-                }
             }
         }
+        if (copyList.size() != 0) {
+            for (BookCopy bookCopy : copyList) {
+                if (bookCopy.getId() != null) {
+                    bookCopyService.makeBookNotAvailable(bookCopy.getId());
+                }
+            }
+            countOrders = copyList.size();
+            for (BookCopy bookCopy : copyList) {
+                Order order = new Order();
+                order.setReaderId(reader.getId());
+                order.setCopy_id(bookCopy.getId());
+                order.setDate(getDateForReading());
 
+                if (countOrders > 4) {
+                    order.setPrice(getBookPrice(bookCopy) * 0.85);
+
+                } else if (countOrders > 2) {
+                    order.setPrice(getBookPrice(bookCopy) * 0.9);
+                } else order.setPrice(getBookPrice(bookCopy));
+                //date doesnt work
+                orderService.addNewOrder(order);
+                totalPrice+=order.getPrice();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String strDate = dateFormat.format(order.getDate().getTime());
+                returnOrder.setDate(strDate);
+
+            }
+            returnOrder.setBookNames(books);
+            returnOrder.setPrice(totalPrice);
+
+        }
         return returnOrder;
+
+
     }
 
     public Order returnBook(String bookName, Reader reader, List<String> images, Double rating, Date date) throws SQLException, ClassNotFoundException, ParseException {
@@ -359,10 +360,10 @@ public class BookDaoImpl implements BookDao {
         if (orderList.size() != 0) {
             for (Order order : orderList) {
                 for (Long id : copyList) {
-                    userOrder = order;
-                    if (id == order.getCopy_id()) {
+                    if (id.equals(order.getCopy_id())) {
+                        userOrder = order;
                         copyDao.makeBookAvailable(order.getCopy_id());
-                        /* orderDao.deleteOrder(order.getId());*/
+                         orderDao.deleteOrder(order.getCopy_id());
                         if (images.size() != 0) {
                             for (String path : images) {
                                 Long photoId = copyDao.setDamagedBookPhoto(path);

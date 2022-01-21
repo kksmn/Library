@@ -45,6 +45,7 @@ public class QueryExecutor {
             }
         } catch (SQLException e) {
             //	LOGGER.error("Execute statement error " + e.getMessage());
+            e.printStackTrace();
         }
         return 0;
     }
