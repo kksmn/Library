@@ -1,11 +1,12 @@
-package com.example.Task1.сommand.impl;
+package com.example.Task1.сommand.impl.Library;
 
-import com.example.Task1.dao.OrderDao;
 import com.example.Task1.dao.impl.OrderDaoImpl;
 import com.example.Task1.dao.impl.ReaderDaoImpl;
 import com.example.Task1.models.Reader;
 import com.example.Task1.сommand.ICommand;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class CommandCheckUser implements ICommand {
+    private static final Logger LOGGER = LogManager.getLogger(CommandCheckUser.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,10 +37,8 @@ public class CommandCheckUser implements ICommand {
                response.getWriter().write(json);
            }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
        /* return null;*/
     }

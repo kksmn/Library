@@ -5,19 +5,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Book {
-    Long id;
-    String russianName;
-    String originalName;
-    Integer count;
-    Integer year;//type
-    Date registrationDate;
-    Integer countPages;
-    private List<Author> authors;
-    private List<Genre> genres;
-    private List<String> images;
-    int countAvailableCopies;
-    LocalDate regDate;
-    LocalDate bookYear;
+    public Long id;
+    public String russianName;
+    public String originalName;
+    public Integer count;
+    public Integer countPages;
+    public List<Author> authors;
+    public List<Genre> genres;
+    public List<String> images;
+    public int countAvailableCopies;
+    public LocalDate regDate;
+    public LocalDate bookYear;
 
     public LocalDate getRegDate() {
         return regDate;
@@ -107,23 +105,6 @@ public class Book {
         this.count = count;
     }
 
-
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
 
     public Integer getCountPages() {
         return countPages;

@@ -6,8 +6,8 @@ public class BookCopy {
     public Boolean isDamaged;
     public Boolean isAvailable;
     public Double rating;
-    public Double priceForDay;//type
-    public Double price;//type
+    public Double priceForDay;
+    public Double price;
     public Long damagedBook_id;
 
     public Double getPrice() {

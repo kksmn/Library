@@ -1,7 +1,10 @@
 package com.example.Task1.controller;
 
 import com.example.Task1.сommand.ICommand;
-import com.example.Task1.сommand.impl.*;
+import com.example.Task1.сommand.impl.Library.*;
+import com.example.Task1.сommand.impl.Page.CommandGetBookTable;
+import com.example.Task1.сommand.impl.Page.CommandGetReaderTable;
+import com.example.Task1.сommand.impl.Page.CommandGetSearchPage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

@@ -1,8 +1,10 @@
-package com.example.Task1.сommand.impl;
+package com.example.Task1.сommand.impl.Library;
 
 import com.example.Task1.dao.impl.ReaderDaoImpl;
 import com.example.Task1.models.Reader;
 import com.example.Task1.сommand.ICommand;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,10 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 public class CommandAddReader implements ICommand {
-    private static final Logger log = Logger.getLogger(String.valueOf(CommandAddReader.class));
+    private static final Logger LOGGER = LogManager.getLogger(CommandAddReader.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,11 +39,8 @@ public class CommandAddReader implements ICommand {
             }
 
             readerService.addReader(reader);
-            log.info("New book was added");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("mainPage.jsp");
         requestDispatcher.forward(request, response);

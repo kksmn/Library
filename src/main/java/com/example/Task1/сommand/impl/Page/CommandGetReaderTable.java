@@ -1,8 +1,10 @@
-package com.example.Task1.сommand.impl;
+package com.example.Task1.сommand.impl.Page;
 
 import com.example.Task1.dao.impl.ReaderDaoImpl;
 import com.example.Task1.models.Reader;
 import com.example.Task1.сommand.ICommand;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommandGetReaderTable implements ICommand {
+    private static final Logger LOGGER = LogManager.getLogger(CommandGetReaderTable.class);
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -43,10 +47,8 @@ public class CommandGetReaderTable implements ICommand {
 
                 request.setAttribute("list", list);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("readerTable.jsp");
         requestDispatcher.forward(request, response);

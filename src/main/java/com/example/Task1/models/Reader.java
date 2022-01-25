@@ -1,11 +1,6 @@
 package com.example.Task1.models;
 
-import com.example.Task1.validator.Validator;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import java.sql.Date;
-import java.util.ArrayList;
-@JsonPropertyOrder({"readerPhotoId","date","email","address","passportNumber","patronymic","id","firstname","lastname"})
 public class Reader {
     public Long id;
     public String firstName;

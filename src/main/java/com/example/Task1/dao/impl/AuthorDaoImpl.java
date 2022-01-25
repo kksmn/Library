@@ -1,8 +1,10 @@
 package com.example.Task1.dao.impl;
 
 import com.example.Task1.dao.AuthorDao;
-import com.example.Task1.dao.pool.ConnectionPool;
+import com.example.Task1.dao.executor.QueryExecutor;
 import com.example.Task1.models.Author;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -11,14 +13,15 @@ import java.util.List;
 
 public class AuthorDaoImpl implements AuthorDao {
     private QueryExecutor executor = QueryExecutor.getInstance();
+    private static final Logger LOGGER = LogManager.getLogger(AuthorDaoImpl.class);
 
     private static final String GET_BOOK_ID_BY_AUTHOR = "SELECT book_id FROM AUTHOR_BOOK WHERE author_id=?";
     private static final String GET_AUTHOR_ID_BY_BOOK = "SELECT author_id FROM AUTHOR_BOOK WHERE book_id=?";
     private static final String ADD_NEW_AUTHOR = "INSERT INTO AUTHORS(authorname,path) values (?,?)";
     private static final String GET_AUTHOR_ID_BY_NAME = "SELECT id FROM AUTHORS WHERE authorname=?";
     private static final String GET_AUTHOR_BY_ID = "SELECT authorname,path FROM Authors WHERE id=?";
-    private static final String ADD_AUTHOR_ID="INSERT INTO author_book (book_id, author_id) VALUES (?, ?)";
-    private static final String GET_ALL_AUTHORS="SELECT * FROM authors";
+    private static final String ADD_AUTHOR_ID = "INSERT INTO author_book (book_id, author_id) VALUES (?, ?)";
+    private static final String GET_ALL_AUTHORS = "SELECT * FROM authors";
 
     public Long getAuthorByName(String authorName) {
         Long id = null;
@@ -28,7 +31,7 @@ public class AuthorDaoImpl implements AuthorDao {
                 id = resultSet.getLong("id");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error :" + e.getMessage());
         }
         return id;
     }
@@ -43,7 +46,7 @@ public class AuthorDaoImpl implements AuthorDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error :" + e.getMessage());
         }
         return list;
     }
@@ -58,18 +61,17 @@ public class AuthorDaoImpl implements AuthorDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error :" + e.getMessage());
         }
         return list;
     }
 
-    //что длетаь если изображения не все
     public Long addNewAuthor(String name, String path) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        LocalDate date=LocalDate.now();
-        int id=0;
+        LocalDate date = LocalDate.now();
+        int id = 0;
         try {
             con = executor.getConnection();
             ps = con.prepareStatement(ADD_NEW_AUTHOR, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -83,25 +85,26 @@ public class AuthorDaoImpl implements AuthorDao {
             rs = ps.getGeneratedKeys();
             rs.next();
             id = rs.getInt(1);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
         return Long.valueOf(id);
 
     }
+
     public List<Author> getAllAuthors() {
-        List<Author>authorList = new ArrayList<>();
+        List<Author> authorList = new ArrayList<>();
         try {
-            ResultSet resultSet= executor.getResultSet(GET_ALL_AUTHORS);
+            ResultSet resultSet = executor.getResultSet(GET_ALL_AUTHORS);
             while (resultSet.next()) {
-                Author author=new Author();
+                Author author = new Author();
                 author.setId(resultSet.getLong("id"));
                 author.setAuthorName(resultSet.getString("authorname"));
                 author.setPath(resultSet.getString("path"));
                 authorList.add(author);
             }
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
         return authorList;
     }
@@ -110,38 +113,44 @@ public class AuthorDaoImpl implements AuthorDao {
     public Author getAuthorById(Long id) {
         Author author = new Author();
         try {
-            ResultSet resultSet = executor.getResultSet(GET_AUTHOR_BY_ID,id);
+            ResultSet resultSet = executor.getResultSet(GET_AUTHOR_BY_ID, id);
             while (resultSet.next()) {
                 author.setAuthorName(resultSet.getString("authorname"));
                 author.setPath(resultSet.getString("path"));
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
         return author;
 
     }
 
     public void addAuthorId(Long bookId, Long authorId) {
-        try{
-            executor.executeStatement(ADD_AUTHOR_ID,bookId,authorId);
+        try {
+            executor.executeStatement(ADD_AUTHOR_ID, bookId, authorId);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error :" + e.getMessage());
         }
     }
 
     public List<Author> addAuthorToList(String[] authors, String[] authorImage) {
         List<Author> list = new ArrayList<>();
-        for (int i = 0; i < authors.length; i++) {
-            Long authorId = addNewAuthor(authors[i], authorImage[i]);
-            list.add(new Author(authorId, authors[i], authorImage[i]));
+        try {
+            for (int i = 0; i < authors.length; i++) {
+                Long authorId = addNewAuthor(authors[i], authorImage[i]);
+                list.add(new Author(authorId, authors[i], authorImage[i]));
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error :" + e.getMessage());
         }
+
         return list;
     }
 
 
     public void addAuthorToBook(Long bookId, List<Long> authors) {
+
         for (Long id : authors) {
             addAuthorId(bookId, id);
         }
