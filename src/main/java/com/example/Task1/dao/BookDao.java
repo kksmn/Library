@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 public interface BookDao {
-    Map<Long, Book> getBookMap(String bookName,int start,int total);
-    String getBookById(Long id);
+    Map<Long, Book> getBookMap(String bookName, int start, int total);
+
     List<Long> getBookByName(String bookName);
-    Long getCopyId(String name);
+
     Long addNewBook(Book book);
-    Map<Long,Book> getBooks(int start,int total) throws SQLException, ClassNotFoundException;
-    Integer getBookByCopyId(Integer copyId);
+
+    Map<Long, Book> getBooks(int start, int total) throws SQLException, ClassNotFoundException;
+
 
 
 
