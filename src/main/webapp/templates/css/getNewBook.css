@@ -1,0 +1,168 @@
+body {
+    background-color: #231910;
+}
+#readerInput,#checkUserDebt{
+    width: 250px;
+    height: 31px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    background-color: #231910;
+    color: #ffe6e6;
+    border: #231910;
+    text-align: left;
+    margin:10px;
+}
+
+.image{
+    width: 40px;
+    height:40px;
+    border:0px;
+    margin-top:60px;
+    position: absolute;
+}
+#email{
+    width: 200px;
+    color: black;
+    font-size: 17px;
+    font-family: "Times New Roman";
+}
+span{
+    position: absolute;
+    color: #ffe6e6;
+    font-family: "Times New Roman";
+    font-size: 16px;
+    margin-top:10px;
+}
+.order {
+    border: 1px solid #ffe6e6;
+    margin-top: 100px;
+    margin-left: 800px;
+    margin-right: 80px;
+    position: absolute;
+}
+.closeOrder{
+    margin: 20px;
+    font-family: "Times New Roman";
+    font-size: 16px;
+    color: #ffe6e6;
+    border: 1px solid #ffe6e6;
+    height: 40px;
+    width: 60px;
+    text-align: center;
+}
+.closeOrder:hover,#close:hover{
+    color:#99958C;
+}
+.addBook{
+    width: 160px;
+    height: 31px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    background-color: #231910;
+    color: #ffe6e6;
+    border: 1px solid #ffe6e6;
+    text-align: center;
+    margin-left: 16px;
+
+}
+.addBook:hover,.searchButton:hover,.bookButton:hover{
+    color:#99958C;
+}
+.searchButton{
+    width: 150px;
+    height: 31px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    margin-left: 80px;
+    background-color: #110c08;
+    color: #ffe6e6;
+    border: 1px solid #ffe6e6;
+}
+.bookButton{
+    width: 200px;
+    height: 31px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    background-color: #110c08;
+    color: #ffe6e6;
+    border: 1px solid #ffe6e6;
+    margin-top: 10px;
+}
+#bookForm {
+    position: absolute;
+    margin-top: 280px;
+    margin-left: 100px;
+    position: absolute;
+    border: 1px double white;
+}
+.formWrapper{
+    margin:70px;
+}
+#userInput{
+    margin-top: 225px;
+    position: absolute;
+    margin-left: 50px;
+}
+#readerForm {
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 100px;
+}
+
+h3 {
+    color: #ffe6e6;
+    font-size: 20px;
+    margin-left: 10px;
+    font-family: "Times New Roman";
+}
+
+h2 {
+    color: #ffe6e6;
+    margin-left: 30px;
+    font-family: "Times New Roman";
+
+}
+
+
+p {
+    margin-left: 100px;
+    font-family: "Times New Roman";
+    font-size: 16px;
+    color: #ffe6e6;
+}
+.formWrapper{
+    margin: 20px 50px 50px;
+}
+#errorBook{
+    font-size: 16px;
+    width: 190px;
+    font-family: "Times New Roman";
+    height: 28px;
+    color: #ffe6e6;
+    background-color: #231910;
+    border: black;
+    margin-top: 10px;
+}
+#href{
+    margin-top:50px;
+    font-size: 20px;
+}
+
+#close{
+    font-size: 20px;
+}
+.input {
+    font-size: 14px;
+    width: 190px;
+    font-family: "Times New Roman";
+    height: 28px;
+    margin-bottom: 10px;
+    /*background-color: #231910;*/
+    border: black;
+}
+
+.wrapper {
+    margin-left: 90px;
+    margin-right: 90px;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,32 @@
+A:active {
+    color: #1a1a1a;
+}
+A.currentPage:visited{
+    color:#99958C;
+}
+A.currentPage{
+    color:#99958C;
+}
+
+A:link {
+    text-decoration: none;
+    color: #ffe6e6;
+    margin-left: 60px;
+    margin-right: 100px;
+}
+A:hover{
+    color:#99958C;
+}
+A:visited {
+    color: #ffe6e6;
+}
+.header {
+    position: absolute;
+    top: 30px;
+    height: 30px;
+    width: 100%;
+    border-bottom: 3px solid #ffe6e6;
+}
+A{
+    font-size: 17px;
+}

@@ -1,0 +1,159 @@
+body {
+    background-color: #231910;
+}
+#path{
+    font-size: 17px;
+    font-family: "Times New Roman";
+    background-color: #231910;
+    color: #ffe6e6;
+    border: 2px #110c08;
+}
+
+.image{
+    width: 40px;
+    height:40px;
+    border:0px;
+    margin-top:60px;
+    position: absolute;
+}
+span{
+    position: absolute;
+    color: #ffe6e6;
+    font-family: "Times New Roman";
+    font-size: 16px;
+    margin-top:10px;
+    margin-left: 10px;
+}
+
+.addBook:hover,.findButton:hover,getOrder:hover,.imageButton:hover,.getOrder:hover,#close:hover{
+    color:#99958C;
+}
+
+.addBook{
+    width: 70px;
+    height: 31px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    margin-left: 80px;
+    background-color: #231910;
+    color: #ffe6e6;
+    border: 2px #231910;
+    border: 1px solid #ffe6e6;
+}
+
+.findButton{
+    width: 150px;
+    height: 31px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    background-color: #110c08;
+    color: #ffe6e6;
+    border: 1px solid #ffe6e6;
+    margin-left: 25px;
+}
+#readerInput{
+    font-size: 16px;
+    color: #ffe6e6;
+    width: 190px;
+    margin-bottom: 20px;
+    font-family: "Times New Roman";
+    height: 28px;
+    background-color: #231910;
+    border: #231910;
+}
+.mainWrapper{
+    margin-bottom: 20px;
+}
+.getOrder{
+    width: 200px;
+    height: 51px;
+    font-size: 17px;
+    font-family: "Times New Roman";
+    background-color: #110c08;
+    color: #ffe6e6;
+    border: 1px solid #ffe6e6;
+    margin-top: 30px;
+    margin-left:150px;
+    margin-bottom:50px;
+    position: absolute;
+}
+.imageButton {
+    background-color: #231910;
+    border: 1px solid #ffe6e6;
+    color: #ffe6e6;
+    font-family: "Times New Roman";
+    font-size: 16px;
+}
+#readerForm {
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 100px;
+    position: absolute;
+    border: 1px solid #ffe6e6;
+}
+
+#emailForm {
+    /*
+        position: absolute;*/
+    margin-left: 200px;
+    margin-top: 100px;
+}
+
+h3 {
+    color: #ffe6e6;
+    font-size: 20px;
+    margin-left: 10px;
+    font-family: "Times New Roman";
+}
+#href{
+    margin-top:50px;
+    font-size: 20px;
+}
+.wrapper {
+    margin-left: 90px;
+    margin-right: 90px;
+    margin-bottom: 50px;
+}
+#close{
+    font-size: 20px;
+}
+#orderForm{
+    border: 1px solid #ffe6e6;
+    position: absolute;
+    margin-left: 900px;
+    margin-top: 10px;
+}
+h2 {
+    color: #ffe6e6;
+    margin-left: 30px;
+    font-family: "Times New Roman";
+
+}
+p {
+    margin: 3px;
+    font-family: "Times New Roman";
+    font-size: 17px;
+}
+#errorBook{
+    font-size: 16px;
+    width: 190px;
+    font-family: "Times New Roman";
+    height: 28px;
+    color: #ffe6e6;
+    background-color: #231910;
+    border: black;
+    margin-top: 10px;
+}
+.readerInput,.req,.line {
+    font-size: 16px;
+    width: 190px;
+    font-family: "Times New Roman";
+    height: 28px;
+    border: black;
+}
+
+.wrapper {
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-bottom: 60px;
+}
