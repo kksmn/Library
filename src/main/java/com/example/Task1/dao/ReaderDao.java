@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface ReaderDao {
     void addReader(Reader reader) throws SQLException, ClassNotFoundException;
+
     Reader findReader(String email) throws SQLException, ClassNotFoundException;
+
     List<Reader> getReaders(int start, int total) throws SQLException, ClassNotFoundException;
+
 
 }
