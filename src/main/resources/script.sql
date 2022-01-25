@@ -55,7 +55,7 @@ CREATE TABLE damaged_book
 CREATE TABLE damagedbook_photo
 (
     id  SERIAL PRIMARY KEY NOT NULL,
-    path character varying(50) ,
+    path character varying(50) NOT NULL,
     CONSTRAINT damagedbook_photo_path_key UNIQUE (path)
 )
 CREATE TABLE genres
