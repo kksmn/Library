@@ -50,7 +50,7 @@ span{
     width: 60px;
     text-align: center;
 }
-.closeOrder:hover,#close:hover{
+.closeOrder:hover{
     color:#99958C;
 }
 .addBook{

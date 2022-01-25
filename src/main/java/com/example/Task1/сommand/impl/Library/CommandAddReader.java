@@ -42,7 +42,7 @@ public class CommandAddReader implements ICommand {
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.error("Error :" + e.getMessage());
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("mainPage.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("main?command=getBookTable");
         requestDispatcher.forward(request, response);
     }
 }

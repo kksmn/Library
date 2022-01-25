@@ -1,9 +1,6 @@
 package com.example.Task1.dao.pool;
 
-import com.example.Task1.Config;
-import com.example.Task1.dao.impl.AuthorDaoImpl;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import com.example.Task1.Configs;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -12,9 +9,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ConnectionPool extends Config {
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-
+public class ConnectionPool extends Configs {
     private ConnectionPool(){
     }
 
@@ -32,8 +27,10 @@ public class ConnectionPool extends Config {
             ctx = new InitialContext();
             DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/mydb");
             c = ds.getConnection();
-        } catch (SQLException | NamingException e) {
-            LOGGER.error("Error :" + e.getMessage());
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return c;
     }
